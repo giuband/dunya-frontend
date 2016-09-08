@@ -13,8 +13,10 @@
 
 .CategoryFilter {
   &:not(:first-child) {
+    // avoid showing two consecutive borders, make them overlap ...
     margin-top: -1px;
     details:not([open]) {
+      // ... and make one of them transparent to avoid having a stronger border color
       border-top-color: transparent;
     }
   }
