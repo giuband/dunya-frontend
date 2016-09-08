@@ -12,8 +12,10 @@ const App = () => (
   <Provider store={store}>
     <div>
       <Navbar />
-      <Sidebar />
-      <Results />
+      <div className="flex-content-row">
+        <Sidebar />
+        <Results />
+      </div>
       <LoginModal />
     </div>
   </Provider>

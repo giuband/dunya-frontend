@@ -1,0 +1,57 @@
+@import "./variables.json";
+@import "mixins";
+
+$searchIconWidth: 40px;
+
+.Search {
+  margin-bottom: 30px;
+}
+
+.Search__label {
+  header {
+    margin-bottom: 6px;
+    @include styled-section-header;
+  }
+}
+
+.SearchInput {
+  display: inline-block;
+  max-width: 100%;
+  width: 250px;
+  input {
+    width: calc(100% - #{$searchIconWidth});
+    box-sizing: border-box;
+    height: $searchIconWidth;
+    border: $borderDefaultWidth solid $gray1;
+    border-right: 0;
+    font-size: 16px;
+    border-top-left-radius: $defaultBorderRadius;
+    border-bottom-left-radius: $defaultBorderRadius;
+    padding: 0 5px;
+    transition: border 0.2s ease-in-out;
+    &:focus {
+      outline: 0;
+      border: $borderDefaultWidth solid $blue;
+      border-right: 0;
+    }
+  }
+  button {
+    width: $searchIconWidth;
+    height: $searchIconWidth;
+    background-color: $orangeRegular;
+    border-top-right-radius: $defaultBorderRadius;
+    border-bottom-right-radius: $defaultBorderRadius;
+    text-align: center;
+    vertical-align: top;
+    border: 0;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover, &:focus {
+      background-color: $blue;
+      outline: 0;
+    }
+  }
+  i {
+    color: white;
+  }
+}

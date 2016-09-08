@@ -1,4 +1,27 @@
 {
   "columnWidth": "60px",
-  "gridWidth": "800px"
+  "gridWidth": "800px",
+  "blue": "#3A8B8B",
+  "brownLight": "#905442",
+  "brownDark": "#41322D",
+  "orangeLight": "#F1AB39",
+  "orangeRegular": "#B3411E",
+  "orangeDark": "#753522",
+  "green": "#6D9A1A",
+  "yellowLight": "#F9D56A",
+  "yellowRegular": "#FCF02E",
+  "yellowSand": "#F1E634",
+  "gray1": "#E8E8E8",
+  "gray2": "#F1F1F1",
+  "gray3": "#C5C5C5",
+  "gray4": "#EFEFEF",
+  "navbarHeightBig": "90px",
+  "navbarHeightSmall": "60px",
+  "breakpoints": {
+    "small": "767px",
+    "medium": "815px",
+    "large": "1200px"
+  },
+  "borderDefaultWidth": "3px",
+  "defaultBorderRadius": "5px"
 }

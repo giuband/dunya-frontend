@@ -1,0 +1,9 @@
+@import "variables.json";
+@import "mixins";
+
+.RefineSeach {
+  overflow-y: auto;
+  header {
+    @include styled-section-header;
+  }
+}
