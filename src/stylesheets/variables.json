@@ -23,5 +23,6 @@
     "large": "1200px"
   },
   "borderDefaultWidth": "3px",
-  "defaultBorderRadius": "5px"
+  "defaultBorderRadius": "5px",
+  "sidebarHorizontalPadding": "10px"
 }

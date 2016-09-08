@@ -5,5 +5,48 @@
   overflow-y: auto;
   header {
     @include styled-section-header;
+    padding: 0 $sidebarHorizontalPadding;
+    margin-bottom: 6px;
   }
+  margin: 0 -$sidebarHorizontalPadding;
+}
+
+.CategoryFilter {
+  &:not(:first-child) {
+    margin-top: -1px;
+    details:not([open]) {
+      border-top-color: transparent;
+    }
+  }
+  .fa-plus-circle {
+    float: right;
+    color: transparentize($orangeDark, 0.84);
+  }
+  details {
+    border: 1px solid transparentize($orangeDark, 0.84);
+    border-right: 0;
+    border-left: 0;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] {
+    background: white;
+    padding-bottom: 20px;
+  }
+  summary {
+    padding: 20px $sidebarHorizontalPadding;
+    text-transform: capitalize;
+    cursor: pointer;
+    color: $orangeDark;
+    font-weight: bold;
+    font-size: 18px;
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+.CategoryFilter__category-entry {
+  padding: 0 $sidebarHorizontalPadding;
 }

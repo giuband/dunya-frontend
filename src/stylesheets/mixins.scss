@@ -31,7 +31,10 @@
     transition: width 0.2s ease-in-out;
     left: 50%;
     top: 105%;
-    height: 3px;
+    height: 2px;
+    @include respond-to('medium') {
+      height: 3px;
+    };
     background-color: $brownDark;
   }
   &:hover {

@@ -3,7 +3,7 @@
 
 .Sidebar {
   box-sizing: border-box;
-  padding: 20px 10px;
+  padding: 20px $sidebarHorizontalPadding;
   background: $gray2;
   border-right: 1px solid $gray3;
   margin-left: -30%;
