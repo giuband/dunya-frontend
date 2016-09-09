@@ -12,6 +12,10 @@
 }
 
 .CategoryFilter {
+  color: $orangeDark;
+  header {
+    @include styled-section-header;
+  }
   &:not(:first-child) {
     // avoid showing two consecutive borders, make them overlap ...
     margin-top: -1px;
@@ -40,12 +44,14 @@
     padding: 20px $sidebarHorizontalPadding;
     text-transform: capitalize;
     cursor: pointer;
-    color: $orangeDark;
     font-weight: bold;
     font-size: 18px;
     &:focus {
       outline: 0;
     }
+  }
+  section {
+
   }
 }
 
