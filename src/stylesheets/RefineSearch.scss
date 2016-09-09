@@ -3,12 +3,13 @@
 
 .RefineSeach {
   overflow-y: auto;
-  header {
-    @include styled-section-header;
-    padding: 0 $sidebarHorizontalPadding;
-    margin-bottom: 6px;
-  }
   margin: 0 -$sidebarHorizontalPadding;
+}
+
+.RefineSearch__category-name-header {
+  @include styled-section-header;
+  padding: 0 $sidebarHorizontalPadding;
+  margin-bottom: 6px;
 }
 
 .CategoryFilter {
@@ -51,10 +52,23 @@
     }
   }
   section {
-
+    padding: 0 20px;
   }
 }
 
 .CategoryFilter__category-entry {
-  padding: 0 $sidebarHorizontalPadding;
+}
+
+.CategoryFilter__category-all-entries-list {
+  max-height: 100px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.CategoryFilter__category-selected-entries-list {
+  margin-bottom: 10px;
+}
+
+.CategoryFilter__category-catalogue-header {
+  margin-bottom: 5px;
 }

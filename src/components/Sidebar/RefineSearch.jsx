@@ -37,7 +37,7 @@ export const receivedData = {
 
 const RefineSearch = () => (
   <div className="RefineSeach">
-    <header>
+    <header className="RefineSearch__category-name-header">
       Refine
     </header>
     <div>
