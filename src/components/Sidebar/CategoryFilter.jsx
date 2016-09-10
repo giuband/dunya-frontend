@@ -1,4 +1,6 @@
 import React from 'react';
+import CategoryFilterSelectedList from './CategoryFilterSelectedList';
+import CategoryFilterList from './CategoryFilterList';
 
 const propTypes = {
   title: React.PropTypes.string,
@@ -15,26 +17,9 @@ const CategoryFilter = (props) => (
         </a>
       </summary>
       <section>
-        <div className="CategoryFilter__category-selected-entries-list">
-          {`No ${props.title} selected`}
-        </div>
+        <CategoryFilterSelectedList data={props.data} title={props.title} />
         <header className="CategoryFilter__category-catalogue-header">Available</header>
-        <div className="CategoryFilter__category-catalogue">
-          <div className="CategoryFilter__category-all-entries-list">
-          {props.data.map(entry =>
-            <a
-              key={entry.name}
-              className="CategoryFilter__category-entry"
-              tabIndex="0"
-            >{entry.name}</a>)}
-          </div>
-          <div className="CategoryFilter__category-catalogue-search">
-            <input
-              type="text"
-              placeholder={`Enter ${props.title.substring(0, props.title.length - 1)} name`}
-            />
-          </div>
-        </div>
+        <CategoryFilterList data={props.data} title={props.title} />
       </section>
     </details>
   </div>
