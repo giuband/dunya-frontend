@@ -15,12 +15,13 @@ const generateRecordingsFromReceivedData = () => {
   , []);
 };
 
-const allRecordings = generateRecordingsFromReceivedData();
+// const allRecordings = generateRecordingsFromReceivedData();
 
 const Results = () => (
   <div className="Results">
-    {allRecordings.map((recording, index) =>
-      <ResultItem key={index} recording={recording} />)}
+    Results
+    {/** allRecordings.map((recording, index) =>
+      <ResultItem key={index} recording={recording} />) */}
   </div>
 );
 

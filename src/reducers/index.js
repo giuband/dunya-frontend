@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import sidebar from './sidebar';
+import filtersData from './filtersData';
 
 export default combineReducers({
-  sidebar,
+  filtersData,
 });

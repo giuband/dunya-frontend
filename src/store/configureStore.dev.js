@@ -7,9 +7,9 @@ export default function configureStore(initialState) {
     mainReducer,
     initialState,
     compose(
-      applyMiddleware(thunk)/*,
+      applyMiddleware(thunk),
       // use the redux devtools extension
-      window.devToolsExtension && window.devToolsExtension() */
+      window.devToolsExtension && window.devToolsExtension()
     )
   );
 
