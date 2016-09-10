@@ -9,8 +9,10 @@ const CategoryFilter = (props) => (
   <div className="CategoryFilter">
     <details>
       <summary>
-        {props.title}
-        <i className="fa fa-lg fa-plus-circle" aria-hidden />
+        <a tabIndex="0">
+          {props.title}
+          <i className="fa fa-lg fa-plus-circle" aria-hidden />
+        </a>
       </summary>
       <section>
         <div className="CategoryFilter__category-selected-entries-list">
@@ -20,7 +22,11 @@ const CategoryFilter = (props) => (
         <div className="CategoryFilter__category-catalogue">
           <div className="CategoryFilter__category-all-entries-list">
           {props.data.map(entry =>
-            <div key={entry.name} className="CategoryFilter__category-entry">{entry.name}</div>)}
+            <a
+              key={entry.name}
+              className="CategoryFilter__category-entry"
+              tabIndex="0"
+            >{entry.name}</a>)}
           </div>
           <div className="CategoryFilter__category-catalogue-search">
             <input

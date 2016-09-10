@@ -13,8 +13,10 @@ const propTypes = {
 
 class RefineSearch extends React.Component {
   componentWillMount() {
+    // retrieve data to fill up the "refine" section
     this.props.getFiltersData();
   }
+
   render() {
     const { receivedData, status } = this.props;
     if (status === DATA_FETCH_STATUS.FAILURE) {
