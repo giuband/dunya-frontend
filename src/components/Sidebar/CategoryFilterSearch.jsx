@@ -1,5 +1,5 @@
 import React from 'react';
-import pluralize from 'pluralize';
+import pluralize from '../../utils/pluralRules';
 
 const propTypes = {
   category: React.PropTypes.string,

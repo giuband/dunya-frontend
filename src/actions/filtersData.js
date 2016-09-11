@@ -21,4 +21,4 @@ export const getFiltersData = () => (dispatch) => {
 
 export const toggleSelectedEntry = makeActionCreator(TOGGLE_SELECTED_ENTRY, 'entry', 'category');
 export const toggleExpandCategory = makeActionCreator(TOGGLE_EXPAND_CATEGORY, 'category');
-export const resetCategorySelections = makeActionCreator(RESET_CATEGORY_SELECTIONS, 'category');
+export const resetCategorySelections = makeActionCreator(RESET_CATEGORY_SELECTIONS);

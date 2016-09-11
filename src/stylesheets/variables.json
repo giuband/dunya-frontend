@@ -24,5 +24,6 @@
   },
   "borderDefaultWidth": "3px",
   "defaultBorderRadius": "5px",
-  "sidebarHorizontalPadding": "10px"
+  "sidebarHorizontalPadding": "10px",
+  "searchFiltersOverviewWidth": "70px"
 }
