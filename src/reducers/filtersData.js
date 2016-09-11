@@ -1,5 +1,5 @@
 import { GET_FILTERS_DATA_REQUEST, GET_FILTERS_DATA_SUCCESS, GET_FILTERS_DATA_FAILURE,
-  TOGGLE_SELECTED_ENTRY }
+  TOGGLE_SELECTED_ENTRY, TOGGLE_EXPAND_CATEGORY }
   from '../actions/actionTypes';
 import { DATA_FETCH_STATUS } from '../constants';
 
@@ -47,6 +47,19 @@ const receivedData = (state = {}, action) => {
   }
 };
 
+const expandedCategories = (state = [], action) => {
+  switch (action.type) {
+    case TOGGLE_EXPAND_CATEGORY: {
+      if (state.includes(action.category)) {
+        return state.filter(category => category !== action.category);
+      }
+      return [...state, action.category];
+    }
+    default:
+      return state;
+  }
+};
+
 const status = (state = DATA_FETCH_STATUS.PROGRESS, action) => {
   switch (action.type) {
     case GET_FILTERS_DATA_REQUEST:
@@ -63,6 +76,7 @@ const status = (state = DATA_FETCH_STATUS.PROGRESS, action) => {
 const filtersData = (state = {}, action) => ({
   selectedData: selectedData(state.selectedData, action),
   receivedData: receivedData(state.receivedData, action),
+  expandedCategories: expandedCategories(state.expandedCategories, action),
   status: status(state.status, action),
 });
 

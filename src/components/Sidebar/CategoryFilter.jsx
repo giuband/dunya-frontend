@@ -7,6 +7,7 @@ const propTypes = {
   data: React.PropTypes.array,
 };
 
+// TODO: don't use <details> as not well supported in Firefox, use action toggleExpandCategory
 const CategoryFilter = (props) => (
   <div className="CategoryFilter">
     <details>
