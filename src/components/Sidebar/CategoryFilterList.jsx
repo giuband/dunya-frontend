@@ -3,16 +3,17 @@ import CategoryFilterEntry from './CategoryFilterEntry';
 import CategoryFilterSearch from './CategoryFilterSearch';
 
 const propTypes = {
-  title: React.PropTypes.string,
-  data: React.PropTypes.object,
+  category: React.PropTypes.string,
+  data: React.PropTypes.array,
 };
 
 const CategoryFilterList = (props) => (
   <div className="CategoryFilter__category-catalogue">
     <div className="CategoryFilter__category-all-entries-list">
-    {props.data.map(entry => <CategoryFilterEntry {...entry} />)}
+    {props.data.map(entry =>
+      <CategoryFilterEntry key={entry.name} category={props.category} {...entry} />)}
     </div>
-    <CategoryFilterSearch title={props.title} />
+    <CategoryFilterSearch category={props.category} />
   </div>
 );
 

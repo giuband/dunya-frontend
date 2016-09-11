@@ -3,7 +3,7 @@ import CategoryFilterSelectedList from './CategoryFilterSelectedList';
 import CategoryFilterList from './CategoryFilterList';
 
 const propTypes = {
-  title: React.PropTypes.string,
+  category: React.PropTypes.string,
   data: React.PropTypes.array,
 };
 
@@ -12,14 +12,14 @@ const CategoryFilter = (props) => (
     <details>
       <summary>
         <a tabIndex="0">
-          {props.title}
+          {props.category}
           <i className="fa fa-lg fa-plus-circle" aria-hidden />
         </a>
       </summary>
       <section>
-        <CategoryFilterSelectedList data={props.data} title={props.title} />
+        <CategoryFilterSelectedList data={props.data} category={props.category} />
         <header className="CategoryFilter__category-catalogue-header">Available</header>
-        <CategoryFilterList data={props.data} title={props.title} />
+        <CategoryFilterList data={props.data} category={props.category} />
       </section>
     </details>
   </div>

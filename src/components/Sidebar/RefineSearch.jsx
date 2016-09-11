@@ -34,7 +34,7 @@ class RefineSearch extends React.Component {
           {Object.keys(receivedData).map((categoryFilter) =>
             <CategoryFilter
               key={categoryFilter}
-              title={categoryFilter}
+              category={categoryFilter}
               data={receivedData[categoryFilter]}
             />)
             }
