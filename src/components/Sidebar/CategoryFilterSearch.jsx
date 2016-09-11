@@ -1,4 +1,5 @@
 import React from 'react';
+import pluralize from 'pluralize';
 
 const propTypes = {
   category: React.PropTypes.string,
@@ -8,7 +9,7 @@ const CategoryFilterSearch = (props) => (
   <div className="CategoryFilter__category-catalogue-search">
     <input
       type="text"
-      placeholder={`Enter ${props.category.substring(0, props.category.length - 1)} name`}
+      placeholder={`Enter ${pluralize(props.category, 1)} name`}
     />
   </div>
 );

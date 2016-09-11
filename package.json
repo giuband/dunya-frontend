@@ -45,6 +45,7 @@
     "node-sass": "^3.8.0",
     "node-sass-json-importer": "^2.1.1",
     "normalize.css": "^4.2.0",
+    "pluralize": "^3.0.0",
     "postcss-loader": "^0.13.0",
     "precss": "^1.4.0",
     "react": "^15.3.1",

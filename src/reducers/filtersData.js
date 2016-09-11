@@ -1,5 +1,5 @@
 import { GET_FILTERS_DATA_REQUEST, GET_FILTERS_DATA_SUCCESS, GET_FILTERS_DATA_FAILURE,
-  TOGGLE_SELECTED_ENTRY, TOGGLE_EXPAND_CATEGORY }
+  TOGGLE_SELECTED_ENTRY, TOGGLE_EXPAND_CATEGORY, RESET_CATEGORY_SELECTIONS }
   from '../actions/actionTypes';
 import { DATA_FETCH_STATUS } from '../constants';
 
@@ -23,8 +23,11 @@ const selectedDataCategory = (state = [], action, categoryName) => {
 
 const selectedData = (state = {}, action) => {
   switch (action.type) {
-    case GET_FILTERS_DATA_SUCCESS: {
-      return Object.keys(action.data).reduce((curState, curCategory) =>
+    case GET_FILTERS_DATA_SUCCESS:
+    case RESET_CATEGORY_SELECTIONS: {
+      // data is the receivedData if GET_FILTERS_DATA_SUCCESS, existing stored data otherwise
+      const data = action.data || state;
+      return Object.keys(data).reduce((curState, curCategory) =>
         Object.assign(curState, { [curCategory]: [] }), {});
     }
     case TOGGLE_SELECTED_ENTRY: {
