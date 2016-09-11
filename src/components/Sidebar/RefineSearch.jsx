@@ -11,6 +11,30 @@ const propTypes = {
   getFiltersData: React.PropTypes.func,
 };
 
+const renderRefineSection = (receivedData) => (
+  <div className="RefineSeach">
+    <header className="RefineSearch__category-name-header">
+      Refine
+    </header>
+    <div>
+      {Object.keys(receivedData).map((categoryFilter) =>
+        <CategoryFilter
+          key={categoryFilter}
+          category={categoryFilter}
+          data={receivedData[categoryFilter]}
+        />)
+      }
+    </div>
+  </div>
+);
+
+const renderProgressOverview = () =>
+  <h2>Getting data...</h2>;
+
+const renderErrorOverview = () =>
+  <h2>There was an error retrieving data</h2>;
+
+
 class RefineSearch extends React.Component {
   componentWillMount() {
     // retrieve data to fill up the "refine" section
@@ -19,28 +43,14 @@ class RefineSearch extends React.Component {
 
   render() {
     const { receivedData, status } = this.props;
-    if (status === DATA_FETCH_STATUS.FAILURE) {
-      return <h2>There was an error retrieving data</h2>;
+    switch (status) {
+      case DATA_FETCH_STATUS.SUCCESS:
+        return renderRefineSection(receivedData);
+      case DATA_FETCH_STATUS.FAILURE:
+        return renderErrorOverview();
+      default:
+        return renderProgressOverview();
     }
-    if (status === DATA_FETCH_STATUS.PROGRESS) {
-      return <h2>Getting data...</h2>;
-    }
-    return (
-      <div className="RefineSeach">
-        <header className="RefineSearch__category-name-header">
-          Refine
-        </header>
-        <div>
-          {Object.keys(receivedData).map((categoryFilter) =>
-            <CategoryFilter
-              key={categoryFilter}
-              category={categoryFilter}
-              data={receivedData[categoryFilter]}
-            />)
-            }
-        </div>
-      </div>
-    );
   }
 }
 
@@ -48,6 +58,4 @@ const mapStateToProps = (state) => state.filtersData;
 
 RefineSearch.propTypes = propTypes;
 
-export default connect(mapStateToProps, {
-  getFiltersData,
-})(RefineSearch);
+export default connect(mapStateToProps, { getFiltersData })(RefineSearch);
