@@ -15,6 +15,7 @@ const CategoryFilter = (props) => (
         <a tabIndex="0">
           {props.category}
           <i className="fa fa-lg fa-plus-circle" aria-hidden />
+          <span className="CategoryFilter__selected-counter" />
         </a>
       </summary>
       <section>

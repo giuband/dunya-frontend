@@ -58,6 +58,13 @@
 
 .CategoryFilter__category-entry {
   display: block;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  padding: 4px 2px;
+  margin-right: 3px;
+  color: #333;
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+  @include styleSelectedEntry;
 }
 
 .CategoryFilter__category-all-entries-list {
