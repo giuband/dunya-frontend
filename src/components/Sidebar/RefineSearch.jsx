@@ -54,7 +54,7 @@ class RefineSearch extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => state.filtersData;
+const mapStateToProps = state => state.filtersData;
 
 RefineSearch.propTypes = propTypes;
 

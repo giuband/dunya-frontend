@@ -101,6 +101,7 @@ $searchIconWidth: 40px;
   color: white;
   font-weight: bold;
   transform-origin: center center;
+  transform: scale(0.7);
   transition: transform 0.2s ease-in-out;
   &:before {
     content: 'X';

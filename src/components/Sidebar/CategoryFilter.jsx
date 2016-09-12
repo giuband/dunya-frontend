@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CategoryFilterSelectedList from './CategoryFilterSelectedList';
 import CategoryFilterList from './CategoryFilterList';
-import { getVisibleConcerts } from '../../selectors/filtersData';
+import { getVisibleConcerts, makeGetVisibleCategoryData } from '../../selectors/filtersData';
 
 const propTypes = {
   category: React.PropTypes.string,
@@ -36,7 +36,9 @@ const CategoryFilter = (props) => (
 const makeMapStateToProps = (_, ownProps) => {
   const { category } = ownProps;
   let { data } = ownProps;
+  const getVisibleCategoryData = makeGetVisibleCategoryData();
   return (state) => {
+    data = getVisibleCategoryData(state, ownProps);
     if (category === 'concerts') {
       data = getVisibleConcerts(state);
     }
