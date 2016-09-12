@@ -16,6 +16,16 @@ const getSelectedArtistsDetails = createSelector(
     artistsDetails.find(curArtist => curArtist.name === artistName))
 );
 
+const sortByName = (objectA, objectB) => {
+  if (objectA.name > objectB.name) {
+    return 1;
+  }
+  if (objectA.name < objectB.name) {
+    return -1;
+  }
+  return 0;
+};
+
 export const getVisibleConcerts = createSelector(
   [getSelectedArtistsDetails, getConcerts],
   (selectedArtists, concerts) => {
@@ -30,6 +40,7 @@ export const getVisibleConcerts = createSelector(
     }, []);
     const selectedConcerts = selectedConcertsIDs.map(concertID =>
       concerts.find(curConcert => curConcert.id === concertID));
-    return selectedConcerts;
+    const sortedSelectedConcerts = selectedConcerts.sort(sortByName);
+    return sortedSelectedConcerts;
   }
 );
