@@ -55,7 +55,8 @@ export const getVisibleConcerts = createSelector(
  *  state.filtersData.receivedData = { artists: [{a1}, ...], concerts: [{c1}, {c2}...]}
  *  this would return: [{c1}, {c2}...]
  */
-const getCategoryData = (state, props) => state.filtersData.receivedData[props.category];
+const getCategoryData = (state, props) => ({
+  [props.category]: state.filtersData.receivedData[props.category] });
 
 /**
  * Returns the details of each entry of a specific category
@@ -120,11 +121,39 @@ const getSelectedOtherCategoriesDetails = createSelector(
     getSelectedDetailsAllCategories(selectedOtherCategories, otherCategoriesDetails)
 );
 
+const getEntriesForcedByOtherCategoryFilter = (otherCategorySelections, ownCategoryName) => {
+  let forcedEntries = [];
+  otherCategorySelections.forEach((entry) => {
+    forcedEntries = [...forcedEntries, ...entry[ownCategoryName]];
+  });
+  const filteredEntries = [...new Set(forcedEntries)];
+  if (filteredEntries.length === 1 && filteredEntries[0] === undefined) {
+    return [];
+  }
+  return filteredEntries;
+};
+
 export const makeGetVisibleCategoryData = () =>
   createSelector(
     [getSelectedOtherCategoriesDetails, getCategoryData],
     (selectedInOtherCategories, categoryData) => {
-      console.log(selectedInOtherCategories, categoryData);
-      return categoryData;
+      const categoryName = Object.keys(categoryData)[0];
+      const categoryDataContent = categoryData[categoryName];
+      let filteredEntries = [];
+      Object.keys(selectedInOtherCategories).forEach((category) => {
+        const entriesForcedByOtherCategoryFilter = getEntriesForcedByOtherCategoryFilter(
+          selectedInOtherCategories[category], categoryName);
+        filteredEntries = [...filteredEntries, ...entriesForcedByOtherCategoryFilter];
+      });
+      // remove duplicated entries
+      filteredEntries = [...new Set(filteredEntries)];
+      if (!filteredEntries.length) {
+        return categoryDataContent;
+      }
+      const filteredEntriesContent = filteredEntries.map((entryID) => {
+        const correspondingEntry = categoryDataContent.find(curEntry => curEntry.id === entryID);
+        return correspondingEntry;
+      });
+      return filteredEntriesContent;
     }
   );
