@@ -14,7 +14,7 @@ const propTypes = {
 const renderRefineSection = (receivedData) => (
   <div className="RefineSeach">
     <header className="RefineSearch__category-name-header">
-      Refine
+      Filters
     </header>
     <div>
       {Object.keys(receivedData).map((categoryFilter) =>
