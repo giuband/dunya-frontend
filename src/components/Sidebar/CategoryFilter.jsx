@@ -11,7 +11,7 @@ const propTypes = {
 };
 
 // TODO: don't use <details> as not well supported in Firefox, use action toggleExpandCategory
-const CategoryFilter = (props) => (
+const CategoryFilter = props => (
   <div className="CategoryFilter">
     <details>
       <summary>

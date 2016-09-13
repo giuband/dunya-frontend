@@ -12,6 +12,14 @@ export const getEntryId = (entry) => {
   return entryID;
 };
 
+const getSelectedInCategory = (state, props) => state.filtersData.selectedData[props.category];
+const getCategoryEntries = (state, props) => state.filtersData.receivedData[props.category];
+
+export const makeGetDetailsForEntry = () => createSelector(
+  [getSelectedInCategory, getCategoryEntries],
+  (selected, entries) => selected.map(selEntry => entries.find(entry => entry.name === selEntry))
+);
+
 /**
  * Returns the details of each entry of a specific category.
  * Examples:
