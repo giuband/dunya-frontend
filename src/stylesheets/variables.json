@@ -1,6 +1,7 @@
 {
   "columnWidth": "60px",
   "gridWidth": "800px",
+  "blackText": "#333",
   "blue": "#3A8B8B",
   "brownLight": "#905442",
   "brownDark": "#41322D",

@@ -11,10 +11,13 @@ const propTypes = {
 
 const CategoryFilterSelectedEntry = props => (
   <div className="CategoryFilterSelectedEntry">
-    {props.entry.name}
+    <div className="CategoryFilterSelectedEntry__name">
+      {props.entry.name}
+    </div>
     <button
       onClick={() => props.toggleSelectedEntry(getEntryId(props.entry), props.category)}
-    >X</button>
+      className="CategoryFilterSelectedEntry__remove-entry-button"
+    >✕</button>
   </div>
 );
 
