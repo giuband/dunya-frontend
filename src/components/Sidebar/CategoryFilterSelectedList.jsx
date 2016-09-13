@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import CategoryFilterSelectedEntry from './CategoryFilterSelectedEntry';
 import { makeGetDetailsForEntry, getEntryId } from '../../selectors/filtersData';
 
 const propTypes = {
@@ -7,14 +8,25 @@ const propTypes = {
   selected: React.PropTypes.array,
 };
 
-const CategoryFilterSelectedList = props => (
-  <div className="CategoryFilter__category-selected-entries-list">
-    {(props.selected.length) ?
-    props.selected.map(selected => <div key={getEntryId(selected)}>{selected.name}</div>)
-    : `No ${props.category} selected`
-    }
-  </div>
-);
+const CategoryFilterSelectedList = (props) => {
+  let content;
+  if (!props.selected.length) {
+    content = `No ${props.category} selected`;
+  } else {
+    content = props.selected.map(selected =>
+      <CategoryFilterSelectedEntry
+        key={getEntryId(selected)}
+        entry={selected}
+        category={props.category}
+      />
+    );
+  }
+  return (
+    <div className="CategoryFilter__category-selected-entries-list">
+      {content}
+    </div>
+  );
+};
 
 const makeMapStateToProps = (_, ownProps) => {
   const { category } = ownProps;
