@@ -1,16 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import pluralize from '../../utils/pluralRules';
-import { setSearchCategory } from '../../actions/filtersData';
+import { setSearchCategory, resetSearchCategory } from '../../actions/filtersData';
 
 const propTypes = {
   category: React.PropTypes.string,
+  currentSearch: React.PropTypes.string,
   setSearchCategory: React.PropTypes.func,
+  resetSearchCategory: React.PropTypes.func,
 };
 
-const updateCategorySearch = (evt, props) => {
+const updateCategorySearch = (evt, category, setSearch) => {
   const search = evt.target.value;
-  props.setSearchCategory(search, props.category);
+  setSearch(search, category);
 };
 
 const CategoryFilterSearch = props => (
@@ -18,7 +20,15 @@ const CategoryFilterSearch = props => (
     <input
       type="text"
       placeholder={`Enter ${pluralize(props.category, 1)} name`}
-      onChange={evt => updateCategorySearch(evt, props)}
+      onChange={evt => updateCategorySearch(evt, props.category, props.setSearchCategory)}
+      value={props.currentSearch}
+      onBlur={() => props.resetSearchCategory(props.category)}
+      onKeyDown={(evt) => {
+        if (evt.keyCode === 27) {
+          // reset search when pressing escape
+          props.resetSearchCategory(props.category);
+        }
+      }}
     />
   </div>
 );
@@ -32,4 +42,7 @@ const makeMapStateToProps = (_, ownProps) => {
 };
 
 CategoryFilterSearch.propTypes = propTypes;
-export default connect(makeMapStateToProps, { setSearchCategory })(CategoryFilterSearch);
+export default connect(makeMapStateToProps, {
+  setSearchCategory,
+  resetSearchCategory,
+})(CategoryFilterSearch);
