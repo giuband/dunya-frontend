@@ -50,3 +50,30 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
+@mixin selectedEntry($isActive: false) {
+  $color: $orangeRegular;
+  @if $isActive {
+    $color: $blue;
+    background: transparentize($color, 0.8);
+  }
+  &:hover {
+    background: transparentize($color, 0.8);
+  }
+  &:focus {
+    outline: none;
+    border: 3px solid $color;
+  }
+}
+
+@mixin styleSelectedEntry {
+  cursor: pointer;
+  @include selectedEntry();
+  &.active {
+    &::after {
+      content: '\2713';
+      float: right;
+    }
+    @include selectedEntry(true);
+  }
+}
