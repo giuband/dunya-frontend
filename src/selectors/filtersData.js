@@ -1,13 +1,15 @@
 import { createSelector } from 'reselect';
+import sortByName from '../utils/sortByName';
 
-const sortByName = (objectA, objectB) => {
-  if (objectA.name > objectB.name) {
-    return 1;
+export const getEntryId = (entry) => {
+  const idNames = ['mbid', 'uuid', 'id'];
+  let entryID;
+  for (const id of idNames) {
+    if (entry[id]) {
+      entryID = entry[id];
+    }
   }
-  if (objectA.name < objectB.name) {
-    return -1;
-  }
-  return 0;
+  return entryID;
 };
 
 /**
@@ -108,8 +110,8 @@ const getOwnEntriesThatRespectFilter =
   (selectedEntry, selectedEntryCategoryName, ownCategoryContent) =>
     ownCategoryContent.reduce((ownFilteredEntries, curOwnEntry) => {
       if (curOwnEntry[selectedEntryCategoryName] &&
-        curOwnEntry[selectedEntryCategoryName].includes(selectedEntry.id)) {
-        return [...ownFilteredEntries, curOwnEntry.id];
+        curOwnEntry[selectedEntryCategoryName].includes(getEntryId(selectedEntry))) {
+        return [...ownFilteredEntries, getEntryId(curOwnEntry)];
       }
       return ownFilteredEntries;
     }, []);
@@ -159,10 +161,11 @@ const getVisibleByOtherCategoriesSelections = createSelector(
     filteredCategoryEntries = [...new Set(filteredCategoryEntries)];
     if (!filteredCategoryEntries.length) {
       // if other categories don't force filtered content, return entire content
-      return categoryDataContent;
+      return categoryDataContent.sort(sortByName);
     }
     const filteredCategoryEntriesContent = filteredCategoryEntries.map((entryID) => {
-      const correspondingEntry = categoryDataContent.find(curEntry => curEntry.id === entryID);
+      const correspondingEntry =
+        categoryDataContent.find(curEntry => getEntryId(curEntry) === entryID);
       return correspondingEntry;
     });
     return filteredCategoryEntriesContent.sort(sortByName);

@@ -5,28 +5,42 @@ import { getFiltersData } from '../../actions/filtersData';
 import { DATA_FETCH_STATUS } from '../../constants';
 import '../../stylesheets/RefineSearch.scss';
 
+const sortCategories = (catA, catB) => {
+  if (catA < catB) {
+    return -1;
+  }
+  if (catB < catA) {
+    return 1;
+  }
+  return 0;
+};
+
 const propTypes = {
   receivedData: React.PropTypes.object,
   status: React.PropTypes.string,
   getFiltersData: React.PropTypes.func,
 };
 
-const renderRefineSection = (receivedData) => (
-  <div className="RefineSeach">
-    <header className="RefineSearch__category-name-header">
-      Filters
-    </header>
-    <div>
-      {Object.keys(receivedData).map((categoryFilter) =>
-        <CategoryFilter
-          key={categoryFilter}
-          category={categoryFilter}
-          data={receivedData[categoryFilter]}
-        />)
-      }
+const renderRefineSection = (receivedData) => {
+  const categories = Object.keys(receivedData);
+  const sortedCategories = categories.sort(sortCategories);
+  return (
+    <div className="RefineSeach">
+      <header className="RefineSearch__category-name-header">
+        Filters
+      </header>
+      <div>
+        {sortedCategories.map(category =>
+          <CategoryFilter
+            key={category}
+            category={category}
+            data={receivedData[category]}
+          />)
+        }
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 const renderProgressOverview = () =>
   <h2>Getting data...</h2>;

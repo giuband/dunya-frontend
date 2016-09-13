@@ -22,7 +22,6 @@ const CategoryFilterSearch = props => (
       placeholder={`Enter ${pluralize(props.category, 1)} name`}
       onChange={evt => updateCategorySearch(evt, props.category, props.setSearchCategory)}
       value={props.currentSearch}
-      onBlur={() => props.resetSearchCategory(props.category)}
       onKeyDown={(evt) => {
         if (evt.keyCode === 27) {
           // reset search when pressing escape

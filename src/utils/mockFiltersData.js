@@ -1,4 +1,5 @@
-const useWestCatalogue = true;
+import dunyaMetadata from 'json!./dunya-metadata.json';
+const useWestCatalogue = false;
 
 const getArtists = numOfArtists =>
   [...Array(numOfArtists).keys()].map(index => ({
@@ -81,5 +82,5 @@ export const receivedData = (() => {
   if (useWestCatalogue) {
     return getWesternData();
   }
-  return getIndianData();
+  return dunyaMetadata;
 })();
