@@ -20,7 +20,7 @@ export const getFiltersData = () => (dispatch) => {
     error => dispatch(getFiltersDataFailure(error)));
 };
 
-export const toggleSelectedEntry = makeActionCreator(TOGGLE_SELECTED_ENTRY, 'entry', 'category');
+export const toggleSelectedEntry = makeActionCreator(TOGGLE_SELECTED_ENTRY, 'entryID', 'category');
 export const toggleExpandCategory = makeActionCreator(TOGGLE_EXPAND_CATEGORY, 'category');
 export const resetCategorySelections = makeActionCreator(RESET_CATEGORY_SELECTIONS);
 

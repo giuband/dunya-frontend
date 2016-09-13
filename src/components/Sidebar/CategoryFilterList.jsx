@@ -12,7 +12,7 @@ const CategoryFilterList = props => (
   <div className="CategoryFilter__category-catalogue">
     <div className="CategoryFilter__category-all-entries-list">
     {props.data.map(entry =>
-      <CategoryFilterEntry key={getEntryId(entry)} category={props.category} {...entry} />)}
+      <CategoryFilterEntry key={getEntryId(entry)} category={props.category} entry={entry} />)}
     </div>
     <CategoryFilterSearch category={props.category} />
   </div>

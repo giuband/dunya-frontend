@@ -17,7 +17,13 @@ const getCategoryEntries = (state, props) => state.filtersData.receivedData[prop
 
 export const makeGetDetailsForEntry = () => createSelector(
   [getSelectedInCategory, getCategoryEntries],
-  (selected, entries) => selected.map(selEntry => entries.find(entry => entry.name === selEntry))
+  (selected, entries) => selected.map(selEntry =>
+    entries.find(entry => getEntryId(entry) === selEntry))
+);
+
+export const makeIsEntrySelected = entry => createSelector(
+  [getSelectedInCategory],
+  selected => selected.includes(getEntryId(entry))
 );
 
 /**
@@ -66,7 +72,7 @@ const getSelectedOtherCategories = (state, props) => {
 
 /** Gets the entry details object given its name */
 const getDetailsForSelectedEntry = (entryName, entriesInCategory) =>
-  entriesInCategory.find(curEntry => curEntry.name === entryName);
+  entriesInCategory.find(curEntry => getEntryId(curEntry) === entryName);
 
 /**
  * Given a list of categorized entries, retrieves the details of each entry in a given category.
