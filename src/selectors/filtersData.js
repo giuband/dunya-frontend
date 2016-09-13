@@ -170,8 +170,14 @@ const getVisibleByOtherCategoriesSelections = createSelector(
 );
 
 /** the actual search engine */
-const entrySatisfiesSearch = (entry, search) =>
-  entry.name.substring(0, search.length) === search;
+const entrySatisfiesSearch = (entry, search) => {
+  const letters = Array.prototype.slice.call(search.toLowerCase());
+  const alphanumeric = '\\w*';
+  const regex = letters.reduce((curRegex, curLetter) =>
+    curRegex + curLetter + alphanumeric,
+    alphanumeric);
+  return Boolean(entry.name.toLowerCase().match(new RegExp(regex)));
+};
 
 /** selector that returns category entries matched by search and that
 fulfill filters in other categories */
