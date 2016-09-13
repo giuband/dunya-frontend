@@ -22,6 +22,8 @@ const getCategoryData = (state, props) => ({
   categoryDataContent: state.filtersData.receivedData[props.category],
 });
 
+const getCategorySearchQuery = (state, props) => state.filtersData.searchedData[props.category];
+
 /**
  * Returns the details of each entry for each category different from the selected one.
  * Examples:
@@ -141,28 +143,46 @@ const getEntriesForcedByOtherCategoryFilter =
     return filteredEntries;
   };
 
+/** selector for retrieving entries in category that fulfills filters in others */
+const getVisibleByOtherCategoriesSelections = createSelector(
+  [getSelectedOtherCategoriesDetails, getCategoryData],
+  (selectedInOtherCategories, { categoryName, categoryDataContent }) => {
+    let filteredCategoryEntries = [];
+    Object.keys(selectedInOtherCategories).forEach((otherCategoryName) => {
+      const otherCategorySelections = selectedInOtherCategories[otherCategoryName];
+      const entriesForcedByOtherCategoryFilter = getEntriesForcedByOtherCategoryFilter(
+        otherCategorySelections, categoryName, otherCategoryName, categoryDataContent);
+      filteredCategoryEntries = [...filteredCategoryEntries,
+                                 ...entriesForcedByOtherCategoryFilter];
+    });
+    // remove duplicated entries
+    filteredCategoryEntries = [...new Set(filteredCategoryEntries)];
+    if (!filteredCategoryEntries.length) {
+      // if other categories don't force filtered content, return entire content
+      return categoryDataContent;
+    }
+    const filteredCategoryEntriesContent = filteredCategoryEntries.map((entryID) => {
+      const correspondingEntry = categoryDataContent.find(curEntry => curEntry.id === entryID);
+      return correspondingEntry;
+    });
+    return filteredCategoryEntriesContent.sort(sortByName);
+  }
+);
+
+/** the actual search engine */
+const entrySatisfiesSearch = (entry, search) =>
+  entry.name.substring(0, search.length) === search;
+
+/** selector that returns category entries matched by search and that
+fulfill filters in other categories */
 export const makeGetVisibleCategoryData = () =>
   createSelector(
-    [getSelectedOtherCategoriesDetails, getCategoryData],
-    (selectedInOtherCategories, { categoryName, categoryDataContent }) => {
-      let filteredCategoryEntries = [];
-      Object.keys(selectedInOtherCategories).forEach((otherCategoryName) => {
-        const otherCategorySelections = selectedInOtherCategories[otherCategoryName];
-        const entriesForcedByOtherCategoryFilter = getEntriesForcedByOtherCategoryFilter(
-          otherCategorySelections, categoryName, otherCategoryName, categoryDataContent);
-        filteredCategoryEntries = [...filteredCategoryEntries,
-                                   ...entriesForcedByOtherCategoryFilter];
-      });
-      // remove duplicated entries
-      filteredCategoryEntries = [...new Set(filteredCategoryEntries)];
-      if (!filteredCategoryEntries.length) {
-        // if other categories don't force filtered content, return entire content
-        return categoryDataContent;
+    [getVisibleByOtherCategoriesSelections, getCategorySearchQuery],
+    (visibleByOtherCategoriesSelections, searchQuery) => {
+      if (searchQuery) {
+        return visibleByOtherCategoriesSelections.filter(entry =>
+          entrySatisfiesSearch(entry, searchQuery));
       }
-      const filteredCategoryEntriesContent = filteredCategoryEntries.map((entryID) => {
-        const correspondingEntry = categoryDataContent.find(curEntry => curEntry.id === entryID);
-        return correspondingEntry;
-      });
-      return filteredCategoryEntriesContent.sort(sortByName);
+      return visibleByOtherCategoriesSelections;
     }
   );

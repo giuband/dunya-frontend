@@ -1,5 +1,6 @@
 import { GET_FILTERS_DATA_REQUEST, GET_FILTERS_DATA_SUCCESS, GET_FILTERS_DATA_FAILURE,
-  TOGGLE_SELECTED_ENTRY, TOGGLE_EXPAND_CATEGORY, RESET_CATEGORY_SELECTIONS }
+  TOGGLE_SELECTED_ENTRY, TOGGLE_EXPAND_CATEGORY, RESET_CATEGORY_SELECTIONS,
+  SET_SEARCH_CATEGORY, RESET_SEARCH_CATEGORY }
   from '../actions/actionTypes';
 import { DATA_FETCH_STATUS } from '../constants';
 
@@ -63,6 +64,23 @@ const expandedCategories = (state = [], action) => {
   }
 };
 
+const searchedData = (state = '', action) => {
+  switch (action.type) {
+    case GET_FILTERS_DATA_SUCCESS: {
+      const data = action.data || state;
+      return Object.keys(data).reduce((curState, curCategory) =>
+        Object.assign(curState, { [curCategory]: '' }), {});
+    }
+    case SET_SEARCH_CATEGORY:
+    case RESET_SEARCH_CATEGORY: {
+      const { category, search } = action;
+      return Object.assign({}, state, { [category]: search || '' });
+    }
+    default:
+      return state;
+  }
+};
+
 const status = (state = DATA_FETCH_STATUS.PROGRESS, action) => {
   switch (action.type) {
     case GET_FILTERS_DATA_REQUEST:
@@ -80,6 +98,7 @@ const filtersData = (state = {}, action) => ({
   selectedData: selectedData(state.selectedData, action),
   receivedData: receivedData(state.receivedData, action),
   expandedCategories: expandedCategories(state.expandedCategories, action),
+  searchedData: searchedData(state.searchedData, action),
   status: status(state.status, action),
 });
 
