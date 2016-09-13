@@ -18,7 +18,7 @@ const sortByName = (objectA, objectB) => {
  *  this would return: { concerts: [{c1}, {c2}...] }
  */
 const getCategoryData = (state, props) => ({
-  categoryName: [props.category],
+  categoryName: props.category,
   categoryDataContent: state.filtersData.receivedData[props.category],
 });
 
@@ -102,32 +102,61 @@ const getSelectedOtherCategoriesDetails = createSelector(
     getSelectedDetailsAllCategories(selectedOtherCategories, otherCategoriesDetails)
 );
 
-const getEntriesForcedByOtherCategoryFilter = (otherCategorySelections, ownCategoryName) => {
-  let forcedEntries = [];
-  otherCategorySelections.forEach((entry) => {
-    forcedEntries = [...forcedEntries, ...entry[ownCategoryName]];
-  });
-  const filteredEntries = [...new Set(forcedEntries)];
-  if (filteredEntries.length === 1 && filteredEntries[0] === undefined) {
-    return [];
-  }
-  return filteredEntries;
-};
+const getOwnEntriesThatRespectFilter =
+  (selectedEntry, selectedEntryCategoryName, ownCategoryContent) =>
+    ownCategoryContent.reduce((ownFilteredEntries, curOwnEntry) => {
+      if (curOwnEntry[selectedEntryCategoryName] &&
+        curOwnEntry[selectedEntryCategoryName].includes(selectedEntry.id)) {
+        return [...ownFilteredEntries, curOwnEntry.id];
+      }
+      return ownFilteredEntries;
+    }, []);
+
+const getEntriesForcedByOtherCategoryFilter =
+  (otherCategorySelections, ownCategoryName, otherCategoryName, ownCategoryContent) => {
+    let forcedEntries = [];
+    otherCategorySelections.forEach((entry) => {
+      let entriesForcedByCurrentSelection = [];
+      if (entry[ownCategoryName]) {
+        /** `entry` could be a super-entity and contain a reference of all other fields.
+        e.g. artists is a super-entity because for each of its entries we store all other
+        fields, i.e. for each artist we store the instruments/taalas/raagas he plays and so on.
+        So if `entry` has been selected and is a super-entity, we can easily get the entries to
+        filter in `ownCategory` by just getting the list stored in each super-entity selected.
+        */
+        entriesForcedByCurrentSelection = entry[ownCategoryName];
+      } else {
+        /** if `entry` is not a super-entity, it doesn't contain relational information.
+        We have to get such relational information by `ownCategory` hoping that `ownCategory`
+        is a super-entity. If not, no entries will be forced for `ownCategory` by the selections
+        of the current `otherCategory`.
+        */
+        entriesForcedByCurrentSelection =
+          getOwnEntriesThatRespectFilter(entry, otherCategoryName, ownCategoryContent);
+      }
+      forcedEntries = [...forcedEntries, ...entriesForcedByCurrentSelection];
+    });
+    // remove duplicates
+    const filteredEntries = [...new Set(forcedEntries)];
+    return filteredEntries;
+  };
 
 export const makeGetVisibleCategoryData = () =>
   createSelector(
     [getSelectedOtherCategoriesDetails, getCategoryData],
     (selectedInOtherCategories, { categoryName, categoryDataContent }) => {
       let filteredCategoryEntries = [];
-      Object.keys(selectedInOtherCategories).forEach((category) => {
+      Object.keys(selectedInOtherCategories).forEach((otherCategoryName) => {
+        const otherCategorySelections = selectedInOtherCategories[otherCategoryName];
         const entriesForcedByOtherCategoryFilter = getEntriesForcedByOtherCategoryFilter(
-          selectedInOtherCategories[category], categoryName);
+          otherCategorySelections, categoryName, otherCategoryName, categoryDataContent);
         filteredCategoryEntries = [...filteredCategoryEntries,
                                    ...entriesForcedByOtherCategoryFilter];
       });
       // remove duplicated entries
       filteredCategoryEntries = [...new Set(filteredCategoryEntries)];
       if (!filteredCategoryEntries.length) {
+        // if other categories don't force filtered content, return entire content
         return categoryDataContent;
       }
       const filteredCategoryEntriesContent = filteredCategoryEntries.map((entryID) => {
