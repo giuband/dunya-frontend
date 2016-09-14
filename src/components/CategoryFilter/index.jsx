@@ -33,11 +33,11 @@ const CategoryFilter = (props) => {
           </a>
         </summary>
         <section>
-          <header className="CategoryFilter__category-catalogue-header">Available</header>
+          <header className="CategoryFilter__category-section-header">Available</header>
           <CategoryFilterList data={props.data} category={props.category} />
         </section>
         <section>
-          <header className="CategoryFilter__category-catalogue-header">Selected</header>
+          <header className="CategoryFilter__category-section-header">Selected</header>
           <div className="CategoryFilter__category-catalogue-list">
             {sortedEntries.map(entry =>
               <SearchOverviewEntry key={getEntryId(entry)} entry={entry} />)}
