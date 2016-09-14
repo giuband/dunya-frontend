@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CategoryFilter from './CategoryFilter';
+import CategoryFilter from '../CategoryFilter';
 import { getFiltersData } from '../../actions/filtersData';
 import { DATA_FETCH_STATUS } from '../../constants';
-import '../../stylesheets/RefineSearch.scss';
+import './RefineSearch.scss';
 
 const sortCategories = (catA, catB) => {
   if (catA < catB) {

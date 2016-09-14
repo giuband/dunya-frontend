@@ -53,6 +53,7 @@ module.exports = {
         ],
         include: [
           path.resolve(__dirname, 'src/stylesheets'),
+          path.resolve(__dirname, 'src/components'),
         ],
       },
       {

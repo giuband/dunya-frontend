@@ -4,7 +4,7 @@ import CategoryFilterSelectedEntry from './CategoryFilterSelectedEntry';
 import { makeGetDetailsForEntry, getEntryId, makeGetVisibleSelected }
   from '../../selectors/filtersData';
 import sortByName from '../../utils/sortByName';
-import '../../stylesheets/CategoryFilterSelected.scss';
+import './CategoryFilterSelectedList.scss';
 import { SHOW_ONLY_VISIBLE_SELECTED } from '../../constants';
 
 const propTypes = {

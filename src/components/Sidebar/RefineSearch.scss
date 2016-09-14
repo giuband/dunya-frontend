@@ -1,9 +1,9 @@
-@import "variables.json";
-@import "mixins";
+@import "../../stylesheets/variables.json";
+@import "../../stylesheets/mixins";
 
 .RefineSeach {
   overflow-y: auto;
-  margin: 0 -$sidebarHorizontalPadding;
+  margin: 0 #{-$sidebarHorizontalPadding};
 }
 
 .RefineSearch__category-name-header {

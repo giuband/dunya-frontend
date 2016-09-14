@@ -1,0 +1,11 @@
+@import "../../stylesheets/mixins";
+@import "../../stylesheets/variables.json";
+
+.MainBody {
+  width: 100%;
+  padding: $bodyVerticalPadding 10px;
+  @include respond-to('medium') {
+    max-height: 100%;
+    overflow-y: auto;
+  };
+}

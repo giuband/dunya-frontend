@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../stylesheets/ResultItem.scss';
+import './ResultItem.scss';
 
 const propTypes = {
   recording: React.PropTypes.object,

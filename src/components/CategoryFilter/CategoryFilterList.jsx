@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryFilterEntry from './CategoryFilterEntry';
 import CategoryFilterSearch from './CategoryFilterSearch';
 import { getEntryId } from '../../selectors/filtersData';
-import '../../stylesheets/CategoryFilterList.scss';
+import './CategoryFilterList.scss';
 
 const propTypes = {
   category: React.PropTypes.string,

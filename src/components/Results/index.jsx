@@ -1,7 +1,7 @@
 import React from 'react';
 import ResultItem from './ResultItem';
 import { receivedData } from '../Sidebar/RefineSearch';
-import '../../stylesheets/Results.scss';
+import './Results.scss';
 
 const generateRecordingsForConcert = (concert) => [...Array(20).keys()].map(index => ({
   id: index,

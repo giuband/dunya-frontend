@@ -1,4 +1,4 @@
-@import "./variables.json";
+@import "variables.json";
 
 @mixin respond-to($breakpoint) {
   // Retrieves the value from the key

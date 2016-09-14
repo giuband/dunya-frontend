@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchInput from './SearchInput';
-import '../../stylesheets/Search.scss';
+import './Search.scss';
 
 const Search = () => (
   <div className="Search">

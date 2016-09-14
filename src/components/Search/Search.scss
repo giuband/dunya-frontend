@@ -1,10 +1,11 @@
-@import "./variables.json";
-@import "mixins";
+@import "../../stylesheets/variables.json";
+@import "../../stylesheets/mixins";
 
 $searchIconWidth: 40px;
 
 .Search {
-  margin-bottom: 50px;
+  width: 90%;
+  margin: 0 auto 40px;
 }
 
 .Search__label {
@@ -34,9 +35,8 @@ $searchIconWidth: 40px;
 
 .SearchInput {
   display: inline-block;
-  max-width: 100%;
-  width: 250px;
   position: relative;
+  width: 100%;
   input {
     width: calc(100% - #{$searchIconWidth});
     box-sizing: border-box;
