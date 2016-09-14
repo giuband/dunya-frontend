@@ -209,3 +209,17 @@ export const makeGetVisibleCategoryData = () =>
       return visibleByOtherCategoriesSelections;
     }
   );
+
+export const makeGetVisibleSelected = () =>
+  createSelector(
+    [getVisibleByOtherCategoriesSelections, getSelectedInCategory],
+    (visibleByOtherCategoriesSelections, selectedInCategory) =>
+      selectedInCategory.reduce((curVisibleSelected, curSelected) => {
+        const visibleSelectedEntry = visibleByOtherCategoriesSelections.find(entry =>
+          getEntryId(entry) === curSelected);
+        if (visibleSelectedEntry) {
+          return [...curVisibleSelected, visibleSelectedEntry];
+        }
+        return curVisibleSelected;
+      }, [])
+  );

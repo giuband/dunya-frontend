@@ -1,17 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoryFilterSelectedEntry from './CategoryFilterSelectedEntry';
-import { makeGetDetailsForEntry, getEntryId } from '../../selectors/filtersData';
+import { makeGetDetailsForEntry, getEntryId, makeGetVisibleSelected }
+  from '../../selectors/filtersData';
+import sortByName from '../../utils/sortByName';
 import '../../stylesheets/CategoryFilterSelected.scss';
+import { SHOW_ONLY_VISIBLE_SELECTED } from '../../constants';
 
 const propTypes = {
   category: React.PropTypes.string,
   selected: React.PropTypes.array,
+  visibleSelected: React.PropTypes.array,
 };
 
 const CategoryFilterSelectedList = (props) => {
   let content;
-  if (!props.selected.length) {
+  const selectedItems = (SHOW_ONLY_VISIBLE_SELECTED) ?
+    props.visibleSelected : props.selected;
+  const sortedSelectedItems = selectedItems.sort(sortByName);
+  if (!sortedSelectedItems) {
     content = (
       <div
         className="CategoryFilterSelectedList__no-selections-warning"
@@ -19,7 +26,7 @@ const CategoryFilterSelectedList = (props) => {
         {`No ${props.category} selected`}
       </div>);
   } else {
-    content = props.selected.map(selected =>
+    content = sortedSelectedItems.map(selected =>
       <CategoryFilterSelectedEntry
         key={getEntryId(selected)}
         entry={selected}
@@ -37,11 +44,14 @@ const CategoryFilterSelectedList = (props) => {
 const makeMapStateToProps = (_, ownProps) => {
   const { category } = ownProps;
   const getDetailsForEntry = makeGetDetailsForEntry();
+  const getVisibleSelected = makeGetVisibleSelected();
   return (state) => {
     const selected = getDetailsForEntry(state, ownProps);
+    const visibleSelected = getVisibleSelected(state, ownProps);
     return {
       category,
       selected,
+      visibleSelected,
     };
   };
 };

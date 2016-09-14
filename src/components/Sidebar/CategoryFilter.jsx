@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CategoryFilterSelectedList from './CategoryFilterSelectedList';
 import CategoryFilterList from './CategoryFilterList';
-import { makeGetVisibleCategoryData } from '../../selectors/filtersData';
+import { makeGetVisibleCategoryData, makeGetVisibleSelected } from '../../selectors/filtersData';
+import { SHOW_ONLY_VISIBLE_SELECTED } from '../../constants';
 
 const propTypes = {
   category: React.PropTypes.string,
@@ -37,9 +38,12 @@ const makeMapStateToProps = (_, ownProps) => {
   const { category } = ownProps;
   let { data } = ownProps;
   const getVisibleCategoryData = makeGetVisibleCategoryData();
+  const getVisibleSelected = makeGetVisibleSelected();
   return (state) => {
     data = getVisibleCategoryData(state, ownProps);
-    const selectedItemsCount = state.filtersData.selectedData[category].length;
+    const visibleSelected = getVisibleSelected(state, ownProps);
+    const selectedItemsCount = (SHOW_ONLY_VISIBLE_SELECTED) ?
+      visibleSelected.length : state.filtersData.selectedData[category].length;
     return {
       data,
       category,
