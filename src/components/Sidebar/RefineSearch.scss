@@ -1,9 +1,9 @@
-@import "variables.json";
-@import "mixins";
+@import "../../stylesheets/variables.json";
+@import "../../stylesheets/mixins";
 
 .RefineSeach {
   overflow-y: auto;
-  margin: 0 -$sidebarHorizontalPadding;
+  margin: 0 #{-$sidebarHorizontalPadding};
 }
 
 .RefineSearch__category-name-header {
@@ -15,7 +15,7 @@
 .CategoryFilter {
   color: $orangeDark;
   header {
-    @include styled-section-header;
+    // @include styled-section-header;
   }
   &:not(:first-child) {
     // avoid showing two consecutive borders, make them overlap ...
@@ -54,34 +54,4 @@
   section {
     padding: 0 20px;
   }
-}
-
-.CategoryFilter__category-entry {
-  display: block;
-  box-sizing: border-box;
-  border: 3px solid transparent;
-  padding: 4px 2px;
-  margin-right: 3px;
-  color: #333;
-  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
-  @include styleSelectedEntry;
-}
-
-.CategoryFilter__category-all-entries-list {
-  max-height: 100px;
-  overflow-y: auto;
-  margin-bottom: 10px;
-}
-
-.CategoryFilter__category-selected-entries-list {
-  margin-bottom: 10px;
-}
-
-.CategoryFilter__category-catalogue-header {
-  margin-bottom: 5px;
-}
-
-.CategoryFilter__selected-counter {
-  float: right;
-  margin-right: 10px;
 }

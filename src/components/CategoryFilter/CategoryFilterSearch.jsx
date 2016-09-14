@@ -17,8 +17,13 @@ const updateCategorySearch = (evt, category, setSearch) => {
 
 const CategoryFilterSearch = props => (
   <div className="CategoryFilter__category-catalogue-search">
+    <i
+      className="fa fa-search CategoryFilter__category-catalogue-search__search-icon"
+      aria-hidden
+    />
     <input
       type="text"
+      className="CategoryFilter__category-catalogue-search__input"
       placeholder={`Enter ${pluralize(props.category, 1)} name`}
       onChange={evt => updateCategorySearch(evt, props.category, props.setSearchCategory)}
       value={props.currentSearch}

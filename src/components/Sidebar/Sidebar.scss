@@ -1,11 +1,11 @@
-@import "./variables.json";
-@import "mixins";
+@import "../../stylesheets/variables.json";
+@import "../../stylesheets/mixins";
 
 .Sidebar {
   box-sizing: border-box;
-  padding: 20px $sidebarHorizontalPadding;
+  padding: $bodyVerticalPadding $sidebarHorizontalPadding;
   background: $gray2;
-  border-right: 1px solid $gray3;
+  box-shadow: 20px 0 20px -20px $softShadowColor;
   margin-left: -30%;
   width: 30%;
   transition: margin-left 0.2s ease-in-out;

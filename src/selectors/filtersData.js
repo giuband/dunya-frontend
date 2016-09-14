@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import sortByName from '../utils/sortByName';
+import { SHOW_ONLY_VISIBLE_SELECTED } from '../constants';
 
 export const getEntryId = (entry) => {
   const idNames = ['mbid', 'uuid', 'id'];
@@ -11,6 +12,20 @@ export const getEntryId = (entry) => {
   }
   return entryID;
 };
+
+const getSelectedInCategory = (state, props) => state.filtersData.selectedData[props.category];
+const getCategoryEntries = (state, props) => state.filtersData.receivedData[props.category];
+
+export const makeGetDetailsForEntry = () => createSelector(
+  [getSelectedInCategory, getCategoryEntries],
+  (selected, entries) => selected.map(selEntry =>
+    entries.find(entry => getEntryId(entry) === selEntry))
+);
+
+export const makeIsEntrySelected = entry => createSelector(
+  [getSelectedInCategory],
+  selected => selected.includes(getEntryId(entry))
+);
 
 /**
  * Returns the details of each entry of a specific category.
@@ -58,7 +73,7 @@ const getSelectedOtherCategories = (state, props) => {
 
 /** Gets the entry details object given its name */
 const getDetailsForSelectedEntry = (entryName, entriesInCategory) =>
-  entriesInCategory.find(curEntry => curEntry.name === entryName);
+  entriesInCategory.find(curEntry => getEntryId(curEntry) === entryName);
 
 /**
  * Given a list of categorized entries, retrieves the details of each entry in a given category.
@@ -195,3 +210,38 @@ export const makeGetVisibleCategoryData = () =>
       return visibleByOtherCategoriesSelections;
     }
   );
+
+export const makeGetVisibleSelected = () =>
+  createSelector(
+    [getVisibleByOtherCategoriesSelections, getSelectedInCategory],
+    (visibleByOtherCategoriesSelections, selectedInCategory) =>
+      selectedInCategory.reduce((curVisibleSelected, curSelected) => {
+        const visibleSelectedEntry = visibleByOtherCategoriesSelections.find(entry =>
+          getEntryId(entry) === curSelected);
+        if (visibleSelectedEntry) {
+          return [...curVisibleSelected, visibleSelectedEntry];
+        }
+        return curVisibleSelected;
+      }, [])
+  );
+
+const getAllSelectedData = state => state.filtersData.selectedData;
+const getState = state => state;
+
+export const getAllSelectedEntries = createSelector(
+  [getAllSelectedData, getState],
+  (allSelectedData, state) =>
+    Object.keys(allSelectedData).reduce((curSelectedData, category) => {
+      const getVisibleSelected = makeGetVisibleSelected();
+      const getDetailsForEntry = makeGetDetailsForEntry();
+      let visibleSelectedInCategory;
+      if (SHOW_ONLY_VISIBLE_SELECTED) {
+        visibleSelectedInCategory = getVisibleSelected(state, { category });
+      } else {
+        visibleSelectedInCategory = getDetailsForEntry(state, { category });
+      }
+      const enrichedVisibleEntries = visibleSelectedInCategory.map(selectedEntry =>
+        Object.assign({}, selectedEntry, { category }));
+      return [...curSelectedData, ...enrichedVisibleEntries];
+    }, [])
+);

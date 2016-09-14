@@ -8,3 +8,6 @@ export const DATA_FETCH_STATUS = {
   SUCCESS: 'SUCCESS',
   FAILURE: 'FAILURE',
 };
+
+// whether to show in selected list only entries that fulfill all filters
+export const SHOW_ONLY_VISIBLE_SELECTED = false;

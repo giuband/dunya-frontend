@@ -10,12 +10,12 @@ const selectedDataCategory = (state = [], action, categoryName) => {
   }
   switch (action.type) {
     case TOGGLE_SELECTED_ENTRY: {
-      if (state.includes(action.entry)) {
+      if (state.includes(action.entryID)) {
         // remove entry if already selected ...
-        return state.filter(entry => entry !== action.entry);
+        return state.filter(entryID => entryID !== action.entryID);
       }
       // ... otherwise add it to the list of selected items
-      return [...state, action.entry];
+      return [...state, action.entryID];
     }
     default:
       return state;

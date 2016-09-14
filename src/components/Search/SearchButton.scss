@@ -1,0 +1,38 @@
+@import "../../stylesheets/variables.json";
+@import "../../stylesheets/mixins";
+
+.SearchButton {
+  display: block;
+  position: relative;
+  margin: 20px auto 30px;
+  padding: 15px 50px;
+  background: $lightBlue;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  border-radius: 30px;
+  @include soft-shadow;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: transform 0.2s ease-in-out;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 30px;
+    left: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    background: transparent;
+    transition: opacity 0.2s ease-in-out;
+  }
+  &:hover {
+    transform: scale(1.05);
+    &:before {
+      opacity: 1;
+    }
+  }
+}

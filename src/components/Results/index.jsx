@@ -1,7 +1,7 @@
 import React from 'react';
 import ResultItem from './ResultItem';
 import { receivedData } from '../Sidebar/RefineSearch';
-import '../../stylesheets/Results.scss';
+import './Results.scss';
 
 const generateRecordingsForConcert = (concert) => [...Array(20).keys()].map(index => ({
   id: index,
@@ -19,7 +19,9 @@ const generateRecordingsFromReceivedData = () => {
 
 const Results = () => (
   <div className="Results">
-    Results
+    <header className="Results__header">
+      Results
+    </header>
     {/** allRecordings.map((recording, index) =>
       <ResultItem key={index} recording={recording} />) */}
   </div>

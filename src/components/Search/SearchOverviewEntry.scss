@@ -1,0 +1,55 @@
+@import "../../stylesheets/variables.json";
+
+.SearchOverviewEntry {
+  box-sizing: border-box;
+  height: $searchIconWidth - 10px;
+  margin: 0 5px;
+  background: $gray1;
+  font-weight: bold;
+  color: $brownDark;
+  border-radius: 20px;
+  padding: 0 6px 0 10px;
+  &:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.SearchOverviewEntry__entry-name {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.SearchOverviewEntry__remove-entry {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  transform-origin: center center;
+  transform: scale(0.7);
+  transition: transform 0.2s ease-in-out;
+  &:before {
+    content: '✕';
+  }
+  &:hover {
+    transform: scale(1.3);
+  }
+}
+
+.SearchOverviewEntry__reset-button {
+  float: right;
+  cursor: pointer;
+  background: transparent;
+  position: absolute;
+  top: -1px;
+  right: 2px;
+  outline: 0;
+  border: 0;
+  color: $brownDark;
+}

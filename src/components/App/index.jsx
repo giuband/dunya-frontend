@@ -4,8 +4,8 @@ import configureStore from '../../store';
 import Navbar from '../Navbar';
 import LoginModal from '../LoginModal';
 import Sidebar from '../Sidebar';
-import Results from '../Results';
-import '../../stylesheets/App.scss';
+import MainBody from '../MainBody';
+import './App.scss';
 
 const store = configureStore();
 const App = () => (
@@ -14,7 +14,7 @@ const App = () => (
       <Navbar />
       <div className="flex-content-row">
         <Sidebar />
-        <Results />
+        <MainBody />
       </div>
       <LoginModal />
     </div>
