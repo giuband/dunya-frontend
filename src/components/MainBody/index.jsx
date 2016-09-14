@@ -5,8 +5,12 @@ import './MainBody.scss';
 
 const MainBody = () => (
   <div className="MainBody">
-    <Search />
-    <Results />
+    <section className="MainBody__Item">
+      <Search />
+    </section>
+    <section className="MainBody__Item">
+      <Results />
+    </section>
   </div>
 );
 

@@ -54,7 +54,7 @@
 @mixin selectedEntry($isActive: false) {
   $color: $orangeRegular;
   @if $isActive {
-    $color: $blue;
+    $color: $lightBlue;
     background: transparentize($color, 0.8);
   }
   &:hover {
@@ -76,4 +76,8 @@
     }
     @include selectedEntry(true);
   }
+}
+
+@mixin soft-shadow {
+  box-shadow: 0 5px 20px $softShadowColor;
 }

@@ -18,7 +18,7 @@ const CategoryFilterSelectedList = (props) => {
   const selectedItems = (SHOW_ONLY_VISIBLE_SELECTED) ?
     props.visibleSelected : props.selected;
   const sortedSelectedItems = selectedItems.sort(sortByName);
-  if (!sortedSelectedItems) {
+  if (!sortedSelectedItems.length) {
     content = (
       <div
         className="CategoryFilterSelectedList__no-selections-warning"

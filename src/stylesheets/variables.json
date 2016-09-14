@@ -2,7 +2,9 @@
   "columnWidth": "60px",
   "gridWidth": "800px",
   "blackText": "#333",
+  "midBlack": "#555a55",
   "blue": "#3A8B8B",
+  "lightBlue": "#4ba7c7",
   "brownLight": "#905442",
   "brownDark": "#41322D",
   "orangeLight": "#F1AB39",
@@ -23,9 +25,10 @@
     "medium": "815px",
     "large": "1200px"
   },
-  "borderDefaultWidth": "3px",
+  "borderDefaultWidth": "2px",
   "defaultBorderRadius": "5px",
   "sidebarHorizontalPadding": "10px",
   "searchFiltersOverviewWidth": "70px",
-  "bodyVerticalPadding": "20px"
+  "bodyVerticalPadding": "20px",
+  "softShadowColor": "rgba(210,210,210,0.95)"
 }

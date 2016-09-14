@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchTooltip from './SearchTooltip';
+import SearchOverviewCategory from './SearchOverviewCategory';
 import { searchFiltersOverviewWidth } from 'json!../../stylesheets/variables.json';
 import { resetCategorySelections } from '../../actions/filtersData';
 import { showSearchTooltip, hideSearchTooltip } from '../../actions/search';
@@ -11,6 +12,8 @@ const propTypes = {
   showSearchTooltip: React.PropTypes.func,
   hideSearchTooltip: React.PropTypes.func,
 };
+
+const shouldShowSearchTooltip = false;
 
 const isRefineSearchFiltered = selectedData =>
     Object.keys(selectedData).some(dataKey => selectedData[dataKey].length > 0);
@@ -47,7 +50,12 @@ const onInputChange = (evt, props) => {
 const SearchInput = (props) => {
   const isFilteredSearch = isRefineSearchFiltered(props.selectedData);
   const inputStyle = getInputStyle(isFilteredSearch);
-  const placeHolder = (isFilteredSearch) ? '' : 'Search for recordings';
+  const tooltip = (shouldShowSearchTooltip) ? <SearchTooltip /> : null;
+  const placeHolder = (isFilteredSearch) ? '' : 'Search by recording name or by selected filters';
+  const categoriesFilterOverview = (isFilteredSearch) ?
+    Object.keys(props.selectedData).map(category =>
+      <SearchOverviewCategory key={category} category={category} />)
+    : null;
   return (
     <div className="SearchInput">
       <input
@@ -59,8 +67,12 @@ const SearchInput = (props) => {
         onFocus={() => props.showSearchTooltip()}
         onBlur={() => props.hideSearchTooltip()}
       />
-      {(isFilteredSearch) ? categorySelections(props.resetCategorySelections) : null}
-      <SearchTooltip />
+      <div className="CategoriesFilterOverview__container">
+        <div className="CategoriesFilterOverview__wrapper">
+          {categoriesFilterOverview}
+        </div>
+      </div>
+      {tooltip}
       <button type="submit">
         <i className="fa fa-lg fa-search" aria-hidden />
       </button>
