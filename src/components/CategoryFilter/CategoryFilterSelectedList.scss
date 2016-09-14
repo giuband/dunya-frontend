@@ -1,50 +1,8 @@
-@import "../../stylesheets/variables.json";
-
-$selectedListHeight: 100px;
-
-.CategoryFilterSelectedList {
-  margin-bottom: 10px;
-  color: $blackText;
-  height: $selectedListHeight;
-  overflow-y: auto;
-  border: 1px solid transparentize($blackText, 0.8);
-  padding: 5px;
-  border-radius: $defaultBorderRadius;
-}
-
-.CategoryFilterSelectedList__no-selections-warning {
-  text-align: center;
-  font-size: 1.2em;
-  color: transparentize($blackText, 0.6);
-  font-weight: bold;
-  margin-top: $selectedListHeight / 2;
-  transform: translateY(-50%);
-}
-
-.CategoryFilterSelectedEntry {
-  margin: 2px 0;
-  &:nth-child(even) {
-    background-color: $gray1;
-  }
-  padding: 2px;
-}
-
-.CategoryFilterSelectedEntry__name {
-  display: inline-block;
-  width: 90%;
-}
-
-.CategoryFilterSelectedEntry__remove-entry-button {
-  background: none;
-  float: right;
-  border: 0;
-  outline: 0;
-  color: $orangeRegular;
-  cursor: pointer;
-  transform: scale(0.7);
-  transform-origin: center center;
-  transition: transform 0.2s ease-in-out;
-  &:hover {
-    transform: scale(1.3);
+.CategoryFilter__category-catalogue-list {
+  display: flex;
+  flex-wrap: wrap;
+  .SearchOverviewEntry {
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 }

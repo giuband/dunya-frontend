@@ -15,7 +15,7 @@
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
-  transition: background 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   &:before {
     content: '';
     position: absolute;
@@ -30,6 +30,7 @@
     transition: opacity 0.2s ease-in-out;
   }
   &:hover {
+    transform: scale(1.05);
     &:before {
       opacity: 1;
     }

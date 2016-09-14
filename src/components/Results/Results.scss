@@ -1,2 +1,6 @@
 @import "../../stylesheets/mixins";
 @import "../../stylesheets/variables.json";
+
+.Results__header {
+  @include styled-section-header;
+}

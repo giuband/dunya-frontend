@@ -26,3 +26,20 @@
   float: right;
   margin-right: 10px;
 }
+
+.CategoryFilter__category-catalogue-search {
+  position: relative;
+}
+
+.CategoryFilter__category-catalogue-search__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 25px;
+}
+
+.CategoryFilter__category-catalogue-search__search-icon {
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  color: $blackText;
+}

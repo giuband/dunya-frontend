@@ -93,8 +93,9 @@ $navbarContentHeightBig: $navbarHeightBig - $navbarDividerHeight - 2 * $navbarDi
 
 .NavLinks__item {
   font-size: 14px;
+  font-weight: bold;
   @include styled-link;
   @include respond-to('medium') {
-    font-size: 20px;
+    font-size: 18px;
   };
 }

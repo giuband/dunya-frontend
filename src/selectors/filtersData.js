@@ -233,11 +233,12 @@ export const getAllSelectedEntries = createSelector(
   (allSelectedData, state) =>
     Object.keys(allSelectedData).reduce((curSelectedData, category) => {
       const getVisibleSelected = makeGetVisibleSelected();
+      const getDetailsForEntry = makeGetDetailsForEntry();
       let visibleSelectedInCategory;
       if (SHOW_ONLY_VISIBLE_SELECTED) {
         visibleSelectedInCategory = getVisibleSelected(state, { category });
       } else {
-        visibleSelectedInCategory = getSelectedInCategory(state, { category });
+        visibleSelectedInCategory = getDetailsForEntry(state, { category });
       }
       const enrichedVisibleEntries = visibleSelectedInCategory.map(selectedEntry =>
         Object.assign({}, selectedEntry, { category }));

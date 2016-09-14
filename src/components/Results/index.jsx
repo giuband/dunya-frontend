@@ -19,7 +19,9 @@ const generateRecordingsFromReceivedData = () => {
 
 const Results = () => (
   <div className="Results">
-    Results
+    <header className="Results__header">
+      Results
+    </header>
     {/** allRecordings.map((recording, index) =>
       <ResultItem key={index} recording={recording} />) */}
   </div>
