@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import sortByName from '../utils/sortByName';
+import { SHOW_ONLY_VISIBLE_SELECTED } from '../constants';
 
 export const getEntryId = (entry) => {
   const idNames = ['mbid', 'uuid', 'id'];
@@ -223,3 +224,23 @@ export const makeGetVisibleSelected = () =>
         return curVisibleSelected;
       }, [])
   );
+
+const getAllSelectedData = state => state.filtersData.selectedData;
+const getState = state => state;
+
+export const getAllSelectedEntries = createSelector(
+  [getAllSelectedData, getState],
+  (allSelectedData, state) =>
+    Object.keys(allSelectedData).reduce((curSelectedData, category) => {
+      const getVisibleSelected = makeGetVisibleSelected();
+      let visibleSelectedInCategory;
+      if (SHOW_ONLY_VISIBLE_SELECTED) {
+        visibleSelectedInCategory = getVisibleSelected(state, { category });
+      } else {
+        visibleSelectedInCategory = getSelectedInCategory(state, { category });
+      }
+      const enrichedVisibleEntries = visibleSelectedInCategory.map(selectedEntry =>
+        Object.assign({}, selectedEntry, { category }));
+      return [...curSelectedData, ...enrichedVisibleEntries];
+    }, [])
+);

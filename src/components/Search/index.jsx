@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchInput from './SearchInput';
+import SearchButton from './SearchButton';
 import './Search.scss';
 
 const Search = () => (
@@ -8,6 +9,7 @@ const Search = () => (
       <header>Search</header>
       <SearchInput />
     </label>
+    <SearchButton />
   </div>
 );
 

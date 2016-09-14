@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SHOW_TOOLTIP, HIDE_TOOLTIP } from '../actions/actionTypes';
+import { SHOW_TOOLTIP, HIDE_TOOLTIP, TOGGLE_FOCUS } from '../actions/actionTypes';
 
 const isTooltipVisible = (state = false, action) => {
   switch (action.type) {
@@ -12,4 +12,13 @@ const isTooltipVisible = (state = false, action) => {
   }
 };
 
-export default combineReducers({ isTooltipVisible });
+const isFocused = (state = false, action) => {
+  switch (action.type) {
+    case TOGGLE_FOCUS:
+      return !state;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ isTooltipVisible, isFocused });
