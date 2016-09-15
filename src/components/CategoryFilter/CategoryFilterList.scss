@@ -21,9 +21,10 @@ $entryHorizontalPadding: 2px;
 
 .CategoryFilter__category-all-entries-list {
   max-height: 180px;
-  overflow-y: auto;
+  overflow-y: scroll;
   margin-bottom: 5px;
   pointer-events: all;
+  -webkit-overflow-scrolling: touch;
 }
 
 .CategoryFilter__category-section-header {
