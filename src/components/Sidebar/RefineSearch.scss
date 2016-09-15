@@ -12,46 +12,7 @@
   margin-bottom: 6px;
 }
 
-.CategoryFilter {
-  color: $orangeDark;
-  header {
-    // @include styled-section-header;
-  }
-  &:not(:first-child) {
-    // avoid showing two consecutive borders, make them overlap ...
-    margin-top: -1px;
-    details:not([open]) {
-      // ... and make one of them transparent to avoid having a stronger border color
-      border-top-color: transparent;
-    }
-  }
-  .fa-plus-circle {
-    float: right;
-    color: transparentize($orangeDark, 0.84);
-  }
-  details {
-    border: 1px solid transparentize($orangeDark, 0.84);
-    border-right: 0;
-    border-left: 0;
-  }
-  summary::-webkit-details-marker {
-    display: none;
-  }
-  details[open] {
-    background: white;
-    padding-bottom: 20px;
-  }
-  summary {
-    padding: 20px $sidebarHorizontalPadding;
-    text-transform: capitalize;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
-    &:focus {
-      outline: 0;
-    }
-  }
-  section {
-    padding: 0 20px;
-  }
+.RefineSearch__categories-list {
+  list-style: none;
+  padding-left: 0;
 }

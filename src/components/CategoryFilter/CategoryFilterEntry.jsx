@@ -11,12 +11,14 @@ const propTypes = {
 };
 
 const CategoryFilterEntry = props => (
-  <a
+  <li
     key={getEntryId(props.entry)}
     className={`CategoryFilter__category-entry${(props.isSelected) ? ' active' : ''}`}
+    role="menuitem"
     tabIndex="0"
     onClick={() => props.toggleSelectedEntry(getEntryId(props.entry), props.category)}
-  >{props.entry.name}</a>
+  >{props.entry.name}
+  </li>
 );
 
 const makeMapStateToProps = (_, ownProps) => {

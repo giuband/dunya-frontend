@@ -10,13 +10,13 @@ const propTypes = {
 };
 
 const SearchOverviewEntry = props =>
-  <div className="SearchOverviewEntry">
+  <li className="SearchOverviewEntry">
     <div className="SearchOverviewEntry__entry-name">{props.entry.name}</div>
     <button
       className="SearchOverviewEntry__remove-entry"
       onClick={() => props.toggleSelectedEntry(getEntryId(props.entry), (props.entry.category))}
     />
-  </div>;
+  </li>;
 
 SearchOverviewEntry.propTypes = propTypes;
 export default connect(() => ({}), { toggleSelectedEntry })(SearchOverviewEntry);
