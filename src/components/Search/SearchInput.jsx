@@ -51,29 +51,33 @@ const SearchInput = (props) => {
   const selectedItems = props.allSelectedItems.map(entry =>
     <SearchOverviewEntry key={getEntryId(entry)} entry={entry} />);
   return (
-    <div className={`SearchInput${(props.isFocused) ? ' focus' : ''}`}>
-      <button className="SearchInput__search-button" type="submit">
-        <i className="fa fa-lg fa-search" aria-hidden />
-      </button>
+    <ol className={`SearchInput${(props.isFocused) ? ' focus' : ''}`}>
+      <li>
+        <button className="SearchInput__search-button" type="submit">
+          <i className="fa fa-lg fa-search" aria-hidden />
+        </button>
+      </li>
       {selectedItems}
-      <input
-        id="search"
-        className="SearchInput__input"
-        type="search"
-        placeholder={placeHolder}
-        onChange={evt => onInputChange(evt, props)}
-        onFocus={props.toggleFocus}
-        onBlur={props.toggleFocus}
-        onKeyDown={(evt) => {
-          if (evt.keyCode === 8 && !evt.target.value) {
-            // unselect latest entry when user presses delete key
-            unselectLatestEntry(props);
-          }
-        }}
-      />
+      <li>
+        <input
+          id="search"
+          className="SearchInput__input"
+          type="search"
+          placeholder={placeHolder}
+          onChange={evt => onInputChange(evt, props)}
+          onFocus={props.toggleFocus}
+          onBlur={props.toggleFocus}
+          onKeyDown={(evt) => {
+            if (evt.keyCode === 8 && !evt.target.value) {
+              // unselect latest entry when user presses delete key
+              unselectLatestEntry(props);
+            }
+          }}
+        />
+      </li>
       <ShowMobileMenu />
       {tooltip}
-    </div>
+    </ol>
   );
 };
 

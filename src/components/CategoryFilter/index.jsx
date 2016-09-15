@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { toggleExpandCategory } from 'actions/filtersData';
 import CategoryFilterList from './CategoryFilterList';
 import SearchOverviewEntry from '../Search/SearchOverviewEntry';
 import { makeGetVisibleCategoryData, makeGetVisibleSelected, getEntryId,
   makeGetDetailsForEntry } from '../../selectors/filtersData';
 import { SHOW_ONLY_VISIBLE_SELECTED } from '../../constants';
+import './CategoryFilter.scss';
 import './CategoryFilterSelectedList.scss';
 import sortByName from '../../utils/sortByName';
 
@@ -13,6 +15,8 @@ const propTypes = {
   data: React.PropTypes.array,
   selected: React.PropTypes.array,
   selectedItemsCount: React.PropTypes.number,
+  toggleExpandCategory: React.PropTypes.func,
+  isExpanded: React.PropTypes.bool,
 };
 
 // TODO: don't use <details> as not well supported in Firefox, use action toggleExpandCategory
@@ -21,30 +25,35 @@ const CategoryFilter = (props) => {
     Object.assign({}, entry, { category: props.category }));
   const sortedEntries = enrichedEntries.sort(sortByName);
   return (
-    <div className="CategoryFilter">
-      <details>
-        <summary>
-          <a tabIndex="0">
-            {props.category}
-            <i className="fa fa-lg fa-plus-circle" aria-hidden />
-            <span className="CategoryFilter__selected-counter">
-              {(props.selectedItemsCount) ? props.selectedItemsCount : null}
-            </span>
-          </a>
-        </summary>
-        <section>
-          <header className="CategoryFilter__category-section-header">Available</header>
-          <CategoryFilterList data={props.data} category={props.category} />
-        </section>
-        <section>
-          <header className="CategoryFilter__category-section-header">Selected</header>
-          <div className="CategoryFilter__category-catalogue-list">
-            {sortedEntries.map(entry =>
-              <SearchOverviewEntry key={getEntryId(entry)} entry={entry} />)}
-          </div>
-        </section>
-      </details>
-    </div>
+    <li
+      className={`CategoryFilter${(props.isExpanded) ? ' active' : ''}`}
+      role="menuitem"
+      aria-haspopup
+      aria-labelledby="categoryEntries"
+    >
+      <a
+        tabIndex="0"
+        onClick={() => props.toggleExpandCategory(props.category)}
+        className="CategoryFilter__title"
+      >
+        {props.category}
+        <i className="fa fa-lg fa-plus-circle" aria-hidden />
+        <span className="CategoryFilter__selected-counter">
+          {(props.selectedItemsCount) ? props.selectedItemsCount : null}
+        </span>
+      </a>
+      <div
+        className={`CategoryFilter__section-content${(props.isExpanded) ? ' active' : ''}`}
+      >
+        <header className="CategoryFilter__category-section-header">Available</header>
+        <CategoryFilterList data={props.data} category={props.category} />
+        <header className="CategoryFilter__category-section-header">Selected</header>
+        <ul className="CategoryFilter__category-catalogue-list">
+          {sortedEntries.map(entry =>
+            <SearchOverviewEntry key={getEntryId(entry)} entry={entry} />)}
+        </ul>
+      </div>
+    </li>
   );
 };
 
@@ -61,14 +70,16 @@ const makeMapStateToProps = (_, ownProps) => {
     const selected = (SHOW_ONLY_VISIBLE_SELECTED) ?
       visibleSelected : allSelected;
     const selectedItemsCount = selected.length;
+    const isExpanded = state.filtersData.expandedCategories.includes(category);
     return {
       data,
       selected,
       category,
       selectedItemsCount,
+      isExpanded,
     };
   };
 };
 
 CategoryFilter.propTypes = propTypes;
-export default connect(makeMapStateToProps, {})(CategoryFilter);
+export default connect(makeMapStateToProps, { toggleExpandCategory })(CategoryFilter);

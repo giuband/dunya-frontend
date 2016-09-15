@@ -29,7 +29,8 @@ const renderRefineSection = (receivedData) => {
       <header className="RefineSearch__category-name-header">
         Filters
       </header>
-      <div>
+      <nav>
+        <ul className="RefineSearch__categories-list">
         {sortedCategories.map(category =>
           <CategoryFilter
             key={category}
@@ -37,10 +38,11 @@ const renderRefineSection = (receivedData) => {
             data={receivedData[category]}
           />)
         }
-      </div>
+        </ul>
+      </nav>
     </div>
   );
-}
+};
 
 const renderProgressOverview = () =>
   <h2>Getting data...</h2>;

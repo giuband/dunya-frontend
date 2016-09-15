@@ -7,6 +7,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: -1;
   &:before {
     content: '';
     position: fixed;
@@ -16,12 +17,13 @@
     z-index: -1;
   }
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s linear, z-index 0.2s step-end;
   pointer-events: none;
   &.active {
     opacity: 1;
     pointer-events: auto;
     z-index: 2;
+    transition: opacity 0.2s linear, z-index 0.2s step-start;
   }
   @include respond-to('medium') {
     display: none;
@@ -59,12 +61,17 @@
   width: 100%;
   background-color: $gray2;
   border: 1px solid darken($gray2, 4);
-  outline: 0;
-  cursor: pointer;
-  padding: 10px 0;
   margin-top: 5px;
   &:hover {
     color: $lightBlue;
+  }
+  button {
+    outline: 0;
+    width: 100%;
+    padding: 10px 0;
+    border: 0;
+    cursor: pointer;
+    background: transparent;
   }
   i {
     margin-right: 10px;

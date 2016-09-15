@@ -11,10 +11,13 @@ const propTypes = {
 
 const CategoryFilterList = props => (
   <div className="CategoryFilter__category-catalogue">
-    <div className="CategoryFilter__category-all-entries-list">
+    <ul
+      className="CategoryFilter__category-all-entries-list"
+      role="menu"
+    >
     {props.data.map(entry =>
       <CategoryFilterEntry key={getEntryId(entry)} category={props.category} entry={entry} />)}
-    </div>
+    </ul>
     <CategoryFilterSearch category={props.category} />
   </div>
 );
