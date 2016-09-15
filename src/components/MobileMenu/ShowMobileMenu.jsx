@@ -9,7 +9,7 @@ const propTypes = {
 
 const ShowMobileMenu = props =>
   <button className="ShowMobileMenu" onClick={props.toggleFiltersMenu}>
-    <i className="fa fa-list" aria-hidden />
+    <i className="fa fa-navicon" aria-hidden />
     Show filters
   </button>;
 
