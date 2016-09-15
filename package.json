@@ -6,6 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p",
     "dev": "node express_server.js",
+    "dev-mobile": "NODE_ENV=production node express_server.js",
     "eslint": "./node_modules/eslint/bin/eslint.js src/**/**",
     "test": "karma start karma.config.js"
   },
