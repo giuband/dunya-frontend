@@ -20,7 +20,7 @@
   pointer-events: none;
   &.active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
     z-index: 2;
   }
   @include respond-to('medium') {
