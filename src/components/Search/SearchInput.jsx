@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { toggleFocus, showSearchTooltip, hideSearchTooltip } from 'actions/search';
+import { toggleSelectedEntry } from 'actions/filtersData';
+import { getAllSelectedEntries, getEntryId }
+  from 'selectors/filtersData';
 import SearchTooltip from './SearchTooltip';
 import SearchOverviewEntry from './SearchOverviewEntry';
-import { toggleSelectedEntry } from '../../actions/filtersData';
-import { toggleFocus, showSearchTooltip, hideSearchTooltip } from '../../actions/search';
-import { getAllSelectedEntries, getEntryId }
-  from '../../selectors/filtersData';
 
 const propTypes = {
   allSelectedItems: React.PropTypes.array,
@@ -14,9 +14,12 @@ const propTypes = {
   toggleSelectedEntry: React.PropTypes.func,
   toggleFocus: React.PropTypes.func,
   isFocused: React.PropTypes.bool,
+  windowSize: React.PropTypes.object,
 };
 
 const shouldShowSearchTooltip = false;
+const longPlaceHolder = 'Search by recording name or by selected filters';
+const shortPlaceHolder = 'Search recordings';
 
 const onInputChange = (evt, props) => {
   const inputContent = evt.target.value;
@@ -37,7 +40,10 @@ const unselectLatestEntry = (props) => {
 const SearchInput = (props) => {
   const isFilteredSearch = props.allSelectedItems.length > 0;
   const tooltip = (shouldShowSearchTooltip) ? <SearchTooltip /> : null;
-  const placeHolder = (isFilteredSearch) ? '' : 'Search by recording name or by selected filters';
+  let placeHolder = '';
+  if (!isFilteredSearch) {
+    placeHolder = (props.windowSize.width < 810) ? shortPlaceHolder : longPlaceHolder;
+  }
   const selectedItems = props.allSelectedItems.map(entry =>
     <SearchOverviewEntry key={getEntryId(entry)} entry={entry} />);
   return (
@@ -69,7 +75,8 @@ const SearchInput = (props) => {
 const mapStateToProps = (state) => {
   const allSelectedItems = getAllSelectedEntries(state);
   const { isFocused } = state.search;
-  return { allSelectedItems, isFocused };
+  const { windowSize } = state;
+  return { allSelectedItems, isFocused, windowSize };
 };
 
 SearchInput.propTypes = propTypes;

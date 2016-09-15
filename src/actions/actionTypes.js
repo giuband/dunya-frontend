@@ -12,3 +12,6 @@ export const RESET_SEARCH_CATEGORY = 'RESET_SEARCH_CATEGORY';
 export const SHOW_TOOLTIP = 'SHOW_TOOLTIP';
 export const HIDE_TOOLTIP = 'HIDE_TOOLTIP';
 export const TOGGLE_FOCUS = 'TOGGLE_FOCUS';
+
+// windowSize
+export const UPDATE_WINDOW_SIZE = 'UPDATE_WINDOW_SIZE';

@@ -5,6 +5,7 @@ import Navbar from '../Navbar';
 import LoginModal from '../LoginModal';
 import Sidebar from '../Sidebar';
 import MainBody from '../MainBody';
+import ResizeListener from '../ResizeListener';
 import './App.scss';
 
 const store = configureStore();
@@ -17,6 +18,7 @@ const App = () => (
         <MainBody />
       </div>
       <LoginModal />
+      <ResizeListener />
     </div>
   </Provider>
 );

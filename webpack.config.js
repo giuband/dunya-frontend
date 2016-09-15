@@ -7,6 +7,7 @@ const jsonImporter = require('node-sass-json-importer');
 function getEntrySources(sources) {
   if (process.env.NODE_ENV !== 'production') {
     sources.push('webpack-hot-middleware/client');
+    sources.unshift('react-hot-loader/patch');
   }
   return sources;
 }
