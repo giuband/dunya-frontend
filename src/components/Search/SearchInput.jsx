@@ -6,6 +6,10 @@ import { getAllSelectedEntries, getEntryId }
   from 'selectors/filtersData';
 import SearchTooltip from './SearchTooltip';
 import SearchOverviewEntry from './SearchOverviewEntry';
+import ShowMobileMenu from '../MobileMenu/ShowMobileMenu';
+import { breakpoints } from 'json!../../stylesheets/variables.json';
+
+const breakpoint = parseInt(breakpoints.medium, 10);
 
 const propTypes = {
   allSelectedItems: React.PropTypes.array,
@@ -42,7 +46,7 @@ const SearchInput = (props) => {
   const tooltip = (shouldShowSearchTooltip) ? <SearchTooltip /> : null;
   let placeHolder = '';
   if (!isFilteredSearch) {
-    placeHolder = (props.windowSize.width < 810) ? shortPlaceHolder : longPlaceHolder;
+    placeHolder = (props.windowSize.width < breakpoint) ? shortPlaceHolder : longPlaceHolder;
   }
   const selectedItems = props.allSelectedItems.map(entry =>
     <SearchOverviewEntry key={getEntryId(entry)} entry={entry} />);
@@ -67,6 +71,7 @@ const SearchInput = (props) => {
           }
         }}
       />
+      <ShowMobileMenu />
       {tooltip}
     </div>
   );

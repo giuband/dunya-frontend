@@ -51,8 +51,10 @@ const renderErrorOverview = () =>
 
 class RefineSearch extends React.Component {
   componentWillMount() {
-    // retrieve data to fill up the "refine" section
-    this.props.getFiltersData();
+    if (this.props.status !== DATA_FETCH_STATUS.SUCCESS) {
+      // retrieve data to fill up the "refine" section (if not already fetched)
+      this.props.getFiltersData();
+    }
   }
 
   render() {

@@ -54,12 +54,11 @@
   cursor: pointer;
   i {
     transition: color 0.2s ease-in-out;
-    color: $lightBlue;
   }
   &:hover, &:focus {
     outline: 0;
     i {
-      color: darken($lightBlue, 20);
+      color: $lightBlue;
     }
   }
 }

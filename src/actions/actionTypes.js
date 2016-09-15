@@ -13,5 +13,8 @@ export const SHOW_TOOLTIP = 'SHOW_TOOLTIP';
 export const HIDE_TOOLTIP = 'HIDE_TOOLTIP';
 export const TOGGLE_FOCUS = 'TOGGLE_FOCUS';
 
+// mobile menu
+export const TOGGLE_FILTERS_MENU = 'TOGGLE_FILTERS_MENU';
+
 // windowSize
 export const UPDATE_WINDOW_SIZE = 'UPDATE_WINDOW_SIZE';

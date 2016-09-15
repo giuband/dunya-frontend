@@ -36,7 +36,7 @@ $navbarContentHeightBig: $navbarHeightBig - $navbarDividerHeight - 2 * $navbarDi
   height: $navbarHeightSmall - $navbarDividerHeight;
   width: 100%;
   margin: 0 auto;
-  padding: $navbarContentVerticalPadding 10px;
+  padding: $navbarContentVerticalPadding 30px;
   box-sizing: border-box;
   &:before {
     content: '';
