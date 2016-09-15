@@ -54,19 +54,17 @@
   cursor: pointer;
   i {
     transition: color 0.2s ease-in-out;
-    color: $lightBlue;
   }
   &:hover, &:focus {
     outline: 0;
     i {
-      color: darken($lightBlue, 20);
+      color: $lightBlue;
     }
   }
 }
 
 .SearchInput__input {
   box-sizing: border-box;
-  min-width: 360px;
   height: $searchIconWidth;
   border: 0;
   box-shadow: none;
@@ -77,6 +75,9 @@
   &:focus {
     outline: 0;
   }
+  @include respond-to('medium') {
+    min-width: 360px;
+  };
 }
 
 .CategoriesFilterOverview__container {

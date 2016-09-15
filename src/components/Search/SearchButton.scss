@@ -8,7 +8,8 @@
   padding: 15px 50px;
   background: $lightBlue;
   color: white;
-  border: 0;
+  border: 3px solid transparent;
+  box-sizing: border-box;
   cursor: pointer;
   border-radius: 30px;
   @include soft-shadow;
@@ -34,5 +35,9 @@
     &:before {
       opacity: 1;
     }
+  }
+  &:focus {
+    outline: none;
+    border: 3px solid darken($lightBlue, 10);
   }
 }
