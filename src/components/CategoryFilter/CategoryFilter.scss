@@ -36,18 +36,7 @@
 
 .CategoryFilter__section-content {
   &.active {
-    // hacky method around height: auto
-    max-height: 1000px;
-    * {
-      opacity: 1;
-      z-index: 0;
-      pointer-events: all;
-    }
+    display: block;
   }
-  * {
-    opacity: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-  max-height: 0;
+  display: none;
 }
