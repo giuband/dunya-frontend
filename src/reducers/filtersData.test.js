@@ -10,6 +10,8 @@ describe('filtersData reducer', () => {
   const receivedData = { artists, concerts };
   const expectedInitialState = {
     receivedData,
+    expandedCategories: [],
+    searchedData: { artists: '', concerts: '' },
     selectedData: Object.keys(receivedData).reduce((curState, category) =>
       Object.assign(curState, { [category]: [] }), {}),
     status: DATA_FETCH_STATUS.SUCCESS,
