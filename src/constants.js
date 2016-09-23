@@ -11,3 +11,9 @@ export const DATA_FETCH_STATUS = {
 
 // whether to show in selected list only entries that fulfill all filters
 export const SHOW_ONLY_VISIBLE_SELECTED = false;
+
+// whether to interpret links starting with / as locals or remote ones
+// N.B. it MUST be false on dunya production
+export const USE_REMOTE_SOURCES = true;
+
+export const REMOTE_URL = 'http://dunya.compmusic.upf.edu';
