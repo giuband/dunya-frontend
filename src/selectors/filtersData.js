@@ -194,7 +194,9 @@ const entrySatisfiesSearch = (entry, search) => {
   const regex = letters.reduce((curRegex, curLetter) =>
     curRegex + curLetter + alphanumeric,
     alphanumeric);
-  return Boolean(entry.name.toLowerCase().match(new RegExp(regex)));
+  const aliases = entry.aliases || [];
+  const entryNames = [entry.name, ...aliases];
+  return entryNames.some(name => Boolean(name.toLowerCase().match(new RegExp(regex))));
 };
 
 /** selector that returns category entries matched by search and that
