@@ -1,5 +1,5 @@
 import React from 'react';
-import { navbarIconWidth } from 'json!../../stylesheets/variables.json';
+import { navbarIconWidth } from '../../stylesheets/variables.json';
 
 const navbarWidth = parseInt(navbarIconWidth, 10);
 

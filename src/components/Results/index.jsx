@@ -1,21 +1,9 @@
 import React from 'react';
 import ResultItem from './ResultItem';
-import { receivedData } from '../Sidebar/RefineSearch';
+import { artists, concerts } from '../../utils/resultsMock';
 import './Results.scss';
 
-const generateRecordingsForConcert = (concert) => [...Array(20).keys()].map(index => ({
-  id: index,
-  name: `${concert.name} ${index}`,
-}));
-
-const generateRecordingsFromReceivedData = () => {
-  const { concerts } = receivedData;
-  return concerts.reduce((curState, curConcert) =>
-    [...curState, ...generateRecordingsForConcert(curConcert)]
-  , []);
-};
-
-// const allRecordings = generateRecordingsFromReceivedData();
+console.log(artists, concerts);
 
 const Results = () => (
   <div className="Results">

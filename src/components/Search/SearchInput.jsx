@@ -7,7 +7,7 @@ import { getAllSelectedEntries, getEntryId }
 import SearchTooltip from './SearchTooltip';
 import SearchOverviewEntry from './SearchOverviewEntry';
 import ShowMobileMenu from '../MobileMenu/ShowMobileMenu';
-import { breakpoints } from 'json!../../stylesheets/variables.json';
+import { breakpoints } from '../../stylesheets/variables.json';
 
 const breakpoint = parseInt(breakpoints.medium, 10);
 

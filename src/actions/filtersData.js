@@ -24,6 +24,7 @@ export const toggleSelectedEntry = makeActionCreator(TOGGLE_SELECTED_ENTRY, 'ent
 export const toggleExpandCategory = makeActionCreator(TOGGLE_EXPAND_CATEGORY, 'category');
 export const resetCategorySelections = makeActionCreator(RESET_CATEGORY_SELECTIONS);
 
+// action to update the content of the search box specific to a single category
 export const setSearchCategory = makeActionCreator(SET_SEARCH_CATEGORY, 'search', 'category');
 export const resetSearchCategory = makeActionCreator(RESET_SEARCH_CATEGORY, 'category');
 
