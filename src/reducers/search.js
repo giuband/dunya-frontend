@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import { SHOW_TOOLTIP, HIDE_TOOLTIP, TOGGLE_FOCUS } from '../actions/actionTypes';
+import { SHOW_TOOLTIP, HIDE_TOOLTIP, TOGGLE_FOCUS, SEARCH_REQUEST,
+  SEARCH_SUCCESS, SEARCH_FAILURE, UPDATE_SEARCH_INPUT } from '../actions/actionTypes';
 
 const isTooltipVisible = (state = false, action) => {
   switch (action.type) {
@@ -21,4 +22,37 @@ const isFocused = (state = false, action) => {
   }
 };
 
-export default combineReducers({ isTooltipVisible, isFocused });
+const status = (state = 'success', action) => {
+  switch (action.type) {
+    case SEARCH_REQUEST:
+      return 'progress';
+    case SEARCH_SUCCESS:
+      return 'success';
+    case SEARCH_FAILURE:
+      return 'error';
+    default:
+      return state;
+  }
+};
+
+const results = (state = [], action) => {
+  switch (action.type) {
+    case SEARCH_REQUEST:
+      return [];
+    case SEARCH_SUCCESS:
+      return action.results;
+    default:
+      return state;
+  }
+};
+
+const input = (state = '', action) => {
+  switch (action.type) {
+    case UPDATE_SEARCH_INPUT:
+      return action.input;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ isTooltipVisible, isFocused, status, results, input });

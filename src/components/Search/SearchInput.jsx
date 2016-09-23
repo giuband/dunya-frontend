@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleFocus, showSearchTooltip, hideSearchTooltip } from 'actions/search';
+import { toggleFocus, updateSearchInput } from 'actions/search';
 import { toggleSelectedEntry } from 'actions/filtersData';
 import { getAllSelectedEntries, getEntryId }
   from 'selectors/filtersData';
@@ -13,9 +13,8 @@ const breakpoint = parseInt(breakpoints.medium, 10);
 
 const propTypes = {
   allSelectedItems: React.PropTypes.array,
-  showSearchTooltip: React.PropTypes.func,
-  hideSearchTooltip: React.PropTypes.func,
   toggleSelectedEntry: React.PropTypes.func,
+  updateSearchInput: React.PropTypes.func,
   toggleFocus: React.PropTypes.func,
   isFocused: React.PropTypes.bool,
   windowSize: React.PropTypes.object,
@@ -27,11 +26,7 @@ const shortPlaceHolder = 'Search recordings';
 
 const onInputChange = (evt, props) => {
   const inputContent = evt.target.value;
-  if (inputContent.length) {
-    props.hideSearchTooltip();
-  } else {
-    props.showSearchTooltip();
-  }
+  props.updateSearchInput(inputContent);
 };
 
 const unselectLatestEntry = (props) => {
@@ -92,6 +87,5 @@ SearchInput.propTypes = propTypes;
 export default connect(mapStateToProps, {
   toggleFocus,
   toggleSelectedEntry,
-  showSearchTooltip,
-  hideSearchTooltip,
+  updateSearchInput,
 })(SearchInput);

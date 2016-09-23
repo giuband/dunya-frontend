@@ -1,16 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getSearchResults } from '../../actions/search';
 import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
 import './Search.scss';
 
-const Search = () => (
+const propTypes = {
+  getSearchResults: React.PropTypes.func,
+  searchInput: React.PropTypes.string,
+  selectedData: React.PropTypes.object,
+  isSearchEnabled: React.PropTypes.bool,
+};
+
+const Search = props => (
   <div className="Search">
-    <label className="Search__label" htmlFor="search">
-      <header>Search</header>
-      <SearchInput />
-    </label>
-    <SearchButton />
+    <form
+      onSubmit={(evt) => {
+        evt.preventDefault();
+        props.getSearchResults(props.searchInput, props.selectedData);
+      }}
+    >
+      <label className="Search__label" htmlFor="search">
+        <header>Search</header>
+        <SearchInput />
+      </label>
+      <SearchButton isEnabled={props.isSearchEnabled} />
+    </form>
   </div>
 );
 
-export default Search;
+const mapStateToProps = state => ({
+  searchInput: state.search.input,
+  selectedData: state.filtersData.selectedData,
+  isSearchEnabled: state.search.status !== 'progress',
+});
+
+Search.propTypes = propTypes;
+export default connect(mapStateToProps, { getSearchResults })(Search);

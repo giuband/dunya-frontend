@@ -1,9 +1,6 @@
 import React from 'react';
 import ResultItem from './ResultItem';
-import { artists, concerts } from '../../utils/resultsMock';
 import './Results.scss';
-
-console.log(artists, concerts);
 
 const Results = () => (
   <div className="Results">
