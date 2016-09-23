@@ -1,5 +1,7 @@
 # Dunya front end
 
+[![Build Status](https://travis-ci.org/giuband/dunya-frontend.svg?branch=master)](https://travis-ci.org/giuband/dunya-frontend)
+
 ## Development
 First use
 ```
