@@ -1,6 +1,7 @@
 # Dunya front end
 
 [![Build Status](https://travis-ci.org/giuband/dunya-frontend.svg?branch=master)](https://travis-ci.org/giuband/dunya-frontend)
+![Dependencies](https://david-dm.org/giuband/dunya-frontend.svg)
 
 ## Development
 First use
