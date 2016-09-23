@@ -8,7 +8,9 @@
     "dev": "node express_server.js",
     "dev-mobile": "NODE_ENV=production node express_server.js",
     "eslint": "./node_modules/eslint/bin/eslint.js src/**/**",
-    "test": "./node_modules/jest/bin/jest.js"
+    "test": "./node_modules/jest/bin/jest.js",
+    "test-cov": "./node_modules/jest/bin/jest.js --coverage",
+    "test-json": "./node_modules/jest/bin/jest.js --json --coverage"
   },
   "repository": {
     "type": "git",
