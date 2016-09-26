@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { DATA_FETCH_STATUS } from 'constants';
 import { getMoreResults } from '../../actions/search';
 import Results from './index';
+import Loading from '../Loading';
 import './Results.scss';
 
 const propTypes = {
@@ -17,7 +18,7 @@ const ResultsContainer = (props) => {
     case (DATA_FETCH_STATUS.NOT_ASKED):
       return null;
     case (DATA_FETCH_STATUS.PROGRESS): {
-      const progress = <div>Progress Bar</div>;
+      const progress = <Loading />;
       if (props.results.length) {
         return <Results results={props.results}>{progress}</Results>;
       }

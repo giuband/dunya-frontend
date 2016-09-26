@@ -11,7 +11,9 @@ const Results = props =>
     <header className="Results__header">
       Results
     </header>
-    {props.results.map((result, index) => <ResultItem key={index} result={result} />)}
+    <div className="Results__list">
+      {props.results.map((result, index) => <ResultItem key={index} {...result} />)}
+    </div>
     {props.children}
   </section>;
 
