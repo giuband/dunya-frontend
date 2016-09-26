@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getSearchResults } from '../../actions/search';
+import { DATA_FETCH_STATUS } from 'constants';
+import { getSearchResults } from 'actions/search';
 import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
 import './Search.scss';
@@ -32,7 +33,7 @@ const Search = props => (
 const mapStateToProps = state => ({
   searchInput: state.search.input,
   selectedData: state.filtersData.selectedData,
-  isSearchEnabled: state.search.status !== 'progress',
+  isSearchEnabled: state.search.status !== DATA_FETCH_STATUS.PROGRESS,
 });
 
 Search.propTypes = propTypes;
