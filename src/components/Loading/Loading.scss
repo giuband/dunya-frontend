@@ -1,0 +1,32 @@
+@import "../../stylesheets/variables.json";
+
+$loadingSize: 80px;
+$borderSize: 8px;
+
+.Loading {
+  width: $loadingSize;
+  height: $loadingSize;
+  margin: 20px auto;
+  border: $borderSize solid $blue;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: loading 5s linear infinite;
+}
+
+$colors: $blue, $green, $yellowRegular, $yellowLight, $orangeRegular;
+
+@keyframes loading {
+  @for $i from 1 through length($colors) {
+    $percent: ($i - 1) * 100 / length($colors) + '%';
+    #{$percent} {
+      border-color: nth($colors, $i);
+      border-bottom-color: transparent;
+      transform: rotate(#{($i - 1) * 360}deg);
+    }
+  }
+  100% {
+    border-color: nth($colors, 1);
+    border-bottom-color: transparent;
+    transform: rotate(#{length($colors) * 360}deg)
+  }
+}
