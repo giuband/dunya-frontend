@@ -1,6 +1,6 @@
 import React from 'react';
 import Search from '../Search';
-import Results from '../Results';
+import ResultsContainer from '../Results/ResultsContainer';
 import './MainBody.scss';
 
 const MainBody = () => (
@@ -9,7 +9,7 @@ const MainBody = () => (
       <Search />
     </section>
     <section className="MainBody__Item">
-      <Results />
+      <ResultsContainer />
     </section>
   </div>
 );

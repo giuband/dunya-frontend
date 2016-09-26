@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { DATA_FETCH_STATUS } from 'constants';
 import { SHOW_TOOLTIP, HIDE_TOOLTIP, TOGGLE_FOCUS, SEARCH_REQUEST,
   SEARCH_SUCCESS, SEARCH_FAILURE, UPDATE_SEARCH_INPUT } from '../actions/actionTypes';
 
@@ -22,14 +23,14 @@ const isFocused = (state = false, action) => {
   }
 };
 
-const status = (state = 'success', action) => {
+const status = (state = DATA_FETCH_STATUS.NOT_ASKED, action) => {
   switch (action.type) {
     case SEARCH_REQUEST:
-      return 'progress';
+      return DATA_FETCH_STATUS.PROGRESS;
     case SEARCH_SUCCESS:
-      return 'success';
+      return DATA_FETCH_STATUS.SUCCESS;
     case SEARCH_FAILURE:
-      return 'error';
+      return DATA_FETCH_STATUS.FAILURE;
     default:
       return state;
   }
@@ -40,7 +41,7 @@ const results = (state = [], action) => {
     case SEARCH_REQUEST:
       return [];
     case SEARCH_SUCCESS:
-      return action.results;
+      return [...state, ...action.results];
     default:
       return state;
   }
@@ -55,4 +56,22 @@ const input = (state = '', action) => {
   }
 };
 
-export default combineReducers({ isTooltipVisible, isFocused, status, results, input });
+const pagesLoaded = (state = 0, action) => {
+  switch (action.type) {
+    case SEARCH_REQUEST:
+      return 0;
+    case SEARCH_SUCCESS:
+      return state + 1;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  isTooltipVisible,
+  isFocused,
+  status,
+  results,
+  input,
+  pagesLoaded,
+});

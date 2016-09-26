@@ -1,16 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ResultItem from './ResultItem';
-import './Results.scss';
 
-const Results = () => (
+const propTypes = {
+  results: React.PropTypes.array,
+  children: React.PropTypes.element,
+};
+
+const Results = props =>
   <section className="Results">
     <header className="Results__header">
       Results
     </header>
-    {/** allRecordings.map((recording, index) =>
-      <ResultItem key={index} recording={recording} />) */}
-  </section>
-);
+    {props.results.map((result, index) => <ResultItem key={index} result={result} />)}
+    {props.children}
+  </section>;
 
+Results.propTypes = propTypes;
 export default Results;

@@ -15,6 +15,7 @@ export const TOGGLE_FOCUS = 'TOGGLE_FOCUS';
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_FAILURE = 'SEARCH_FAILURE';
+export const SEARCH_APPEND = 'SEARCH_APPEND';
 export const UPDATE_SEARCH_INPUT = 'UPDATE_SEARCH_INPUT';
 
 // mobile menu

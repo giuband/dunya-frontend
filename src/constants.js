@@ -4,6 +4,7 @@ export const FILTERS_DATA_URL = {
 };
 
 export const DATA_FETCH_STATUS = {
+  NOT_ASKED: 'NOT_ASKED',
   PROGRESS: 'PROGRESS',
   SUCCESS: 'SUCCESS',
   FAILURE: 'FAILURE',

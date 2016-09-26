@@ -2,10 +2,10 @@ import React from 'react';
 import './ResultItem.scss';
 
 const propTypes = {
-  recording: React.PropTypes.object,
+  result: React.PropTypes.object,
 };
-const ResultItem = (props) =>
-  <div className="ResultItem">{props.recording.name}</div>;
+const ResultItem = props =>
+  <div className="ResultItem">{props.result.name}</div>;
 
 ResultItem.propTypes = propTypes;
 export default ResultItem;
