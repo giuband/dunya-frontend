@@ -81,7 +81,7 @@ const searchedData = (state = '', action) => {
   }
 };
 
-const status = (state = DATA_FETCH_STATUS.PROGRESS, action) => {
+const status = (state = DATA_FETCH_STATUS.NOT_ASKED, action) => {
   switch (action.type) {
     case GET_FILTERS_DATA_REQUEST:
       return DATA_FETCH_STATUS.PROGRESS;

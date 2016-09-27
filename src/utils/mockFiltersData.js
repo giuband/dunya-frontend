@@ -1,4 +1,5 @@
-import dunyaMetadata from 'json!./dunya-metadata.json';
+import dunyaMetadata from './dunya-metadata.json';
+
 const useWestCatalogue = false;
 
 const getArtists = numOfArtists =>

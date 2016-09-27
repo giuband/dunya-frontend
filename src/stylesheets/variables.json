@@ -23,7 +23,8 @@
   "breakpoints": {
     "small": "767px",
     "medium": "815px",
-    "large": "1200px"
+    "large": "1200px",
+    "xlarge": "1600px"
   },
   "borderDefaultWidth": "2px",
   "defaultBorderRadius": "5px",

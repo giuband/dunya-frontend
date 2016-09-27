@@ -19,8 +19,11 @@
 }
 
 .CategoryFilter__category-catalogue-list {
+  .SearchOverviewEntry {
+    max-width: 200px;
+  }
   .SearchOverviewEntry__entry-name {
-    max-width: 80%;
+    max-width: 83%;
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -50,16 +53,4 @@
   &:hover {
     transform: scale(1.3);
   }
-}
-
-.SearchOverviewEntry__reset-button {
-  float: right;
-  cursor: pointer;
-  background: transparent;
-  position: absolute;
-  top: -1px;
-  right: 2px;
-  outline: 0;
-  border: 0;
-  color: $brownDark;
 }

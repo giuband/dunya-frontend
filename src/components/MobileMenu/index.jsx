@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { toggleFiltersMenu } from 'actions/mobileMenu';
 import RefineSearch from '../Sidebar/RefineSearch';
 import './MobileMenu.scss';
-import { breakpoints } from 'json!../../stylesheets/variables.json';
+import { breakpoints } from '../../stylesheets/variables.json';
 
 const breakpoint = parseInt(breakpoints.medium, 10);
 

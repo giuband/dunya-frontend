@@ -1,30 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { makeGetDetailsForCategorySelectedEntries } from 'selectors/filtersData';
 import ResultItem from './ResultItem';
-import { receivedData } from '../Sidebar/RefineSearch';
-import './Results.scss';
 
-const generateRecordingsForConcert = (concert) => [...Array(20).keys()].map(index => ({
-  id: index,
-  name: `${concert.name} ${index}`,
-}));
-
-const generateRecordingsFromReceivedData = () => {
-  const { concerts } = receivedData;
-  return concerts.reduce((curState, curConcert) =>
-    [...curState, ...generateRecordingsForConcert(curConcert)]
-  , []);
+const propTypes = {
+  results: React.PropTypes.array,
+  children: React.PropTypes.element,
+  selectedArtists: React.PropTypes.array,
 };
 
-// const allRecordings = generateRecordingsFromReceivedData();
-
-const Results = () => (
-  <div className="Results">
+const Results = props => (
+  <section className="Results">
     <header className="Results__header">
       Results
     </header>
-    {/** allRecordings.map((recording, index) =>
-      <ResultItem key={index} recording={recording} />) */}
-  </div>
+    <div className="Results__list">
+      {props.results.map((result, index) =>
+        <ResultItem key={index} {...result} selectedArtists={props.selectedArtists} />)}
+    </div>
+    {props.children}
+  </section>
 );
 
-export default Results;
+const mapStateToProps = (state) => {
+  const getDetailsForCategorySelectedEntries = makeGetDetailsForCategorySelectedEntries();
+  const selectedArtistsDetails = getDetailsForCategorySelectedEntries(state, { category: 'artists' });
+  return {
+    selectedArtists: selectedArtistsDetails.map(artist => artist.name),
+  };
+};
+Results.propTypes = propTypes;
+export default connect(mapStateToProps, {})(Results);

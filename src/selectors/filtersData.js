@@ -16,7 +16,11 @@ export const getEntryId = (entry) => {
 const getSelectedInCategory = (state, props) => state.filtersData.selectedData[props.category];
 const getCategoryEntries = (state, props) => state.filtersData.receivedData[props.category];
 
-export const makeGetDetailsForEntry = () => createSelector(
+/**
+ * Returns an array of objects, each one containing the details (from the JSON response)
+ * of a selected entry for a given category.
+ */
+export const makeGetDetailsForCategorySelectedEntries = () => createSelector(
   [getSelectedInCategory, getCategoryEntries],
   (selected, entries) => selected.map(selEntry =>
     entries.find(entry => getEntryId(entry) === selEntry))
@@ -194,7 +198,9 @@ const entrySatisfiesSearch = (entry, search) => {
   const regex = letters.reduce((curRegex, curLetter) =>
     curRegex + curLetter + alphanumeric,
     alphanumeric);
-  return Boolean(entry.name.toLowerCase().match(new RegExp(regex)));
+  const aliases = entry.aliases || [];
+  const entryNames = [entry.name, ...aliases];
+  return entryNames.some(name => Boolean(name.toLowerCase().match(new RegExp(regex))));
 };
 
 /** selector that returns category entries matched by search and that
@@ -225,20 +231,25 @@ export const makeGetVisibleSelected = () =>
       }, [])
   );
 
+// aux functions for getAllSelectedEntries
 const getAllSelectedData = state => state.filtersData.selectedData;
 const getState = state => state;
 
+/**
+ * Returns an array of objects, each containing the details (from the JSON response)
+ * for the corresponding selected entry.
+ */
 export const getAllSelectedEntries = createSelector(
   [getAllSelectedData, getState],
   (allSelectedData, state) =>
     Object.keys(allSelectedData).reduce((curSelectedData, category) => {
       const getVisibleSelected = makeGetVisibleSelected();
-      const getDetailsForEntry = makeGetDetailsForEntry();
+      const getDetailsForCategorySelectedEntries = makeGetDetailsForCategorySelectedEntries();
       let visibleSelectedInCategory;
       if (SHOW_ONLY_VISIBLE_SELECTED) {
         visibleSelectedInCategory = getVisibleSelected(state, { category });
       } else {
-        visibleSelectedInCategory = getDetailsForEntry(state, { category });
+        visibleSelectedInCategory = getDetailsForCategorySelectedEntries(state, { category });
       }
       const enrichedVisibleEntries = visibleSelectedInCategory.map(selectedEntry =>
         Object.assign({}, selectedEntry, { category }));
