@@ -3,14 +3,37 @@ import { USE_REMOTE_SOURCES, REMOTE_URL } from 'constants';
 import './ResultItem.scss';
 
 const propTypes = {
-  collaborators: React.PropTypes.array,
+  collaborators: React.PropTypes.arrayOf(React.PropTypes.shape({
+    name: React.PropTypes.string,
+    instrument: React.PropTypes.string,
+  })),
   concert: React.PropTypes.string,
   image: React.PropTypes.string,
   linkToRecording: React.PropTypes.string,
-  mainArtists: React.PropTypes.array,
+  mainArtists: React.PropTypes.arrayOf(React.PropTypes.string),
   name: React.PropTypes.string,
-  raaga: React.PropTypes.array,
-  taala: React.PropTypes.array,
+  selectedArtists: React.PropTypes.array,
+};
+
+const renderList = list => list.join(', ');
+
+const renderCollaboratorsFacts = (selectedArtists, recordingArtists) => {
+  const facts = recordingArtists.reduce((curFacts, curArtist) => {
+    if (selectedArtists.includes(curArtist.name)) {
+      const instrumentPlayed = curArtist.instrument;
+      const factVerb = (instrumentPlayed === 'voice') ?
+        'sings' : `plays the ${instrumentPlayed}`;
+      const curArtistFact =
+        <span><span className="fact__artist">{curArtist.name}</span> {factVerb}</span>;
+      return [...curFacts, curArtistFact];
+    }
+    return curFacts;
+  }, []);
+  return (
+    <ul className="ResultItem__collaborators_facts">
+      {facts.map((fact, index) => <li key={index}>{fact}</li>)}
+    </ul>
+  );
 };
 
 const ResultItem = (props) => {
@@ -20,6 +43,8 @@ const ResultItem = (props) => {
     imageSrc = REMOTE_URL + imageSrc;
     linkToRecording = REMOTE_URL + linkToRecording;
   }
+  const mainKeys = Object.keys(propTypes);
+  const otherInfoKeys = Object.keys(props).filter(key => !mainKeys.includes(key));
   return (
     <a href={linkToRecording} className="ResultItem">
       <div className="ResultItem__header">
@@ -31,19 +56,23 @@ const ResultItem = (props) => {
           <div className="ResultItem__concert">
             {props.concert}
           </div>
+          <div className="ResultItem__main-artists">
+            {renderList(props.mainArtists)}
+          </div>
         </div>
       </div>
-      <div className="ResultItem__main-artists">
-        {props.mainArtists.map(artist => artist.name)}
-      </div>
-      <div className="ResultItem__collaborators">
-        {props.collaborators.map(artist => artist.name)}
-      </div>
       <div className="ResultItem__details">
-        {props.raaga.map(raaga => raaga)}
-      </div>
-      <div className="ResultItem__details">
-        {props.taala.map(taala => taala)}
+        <div className="ResultItem__collaborators">
+          {renderCollaboratorsFacts(props.selectedArtists, props.collaborators)}
+        </div>
+        {otherInfoKeys.map(section =>
+          <div className="ResultItem__other-info" key={section}>
+            <div className="ResultItem__details__header">{section}</div>
+            <div className="ResultItem__other-info-list">
+              {renderList(props[section])}
+            </div>
+          </div>
+        )}
       </div>
     </a>
   );

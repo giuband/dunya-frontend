@@ -48,6 +48,24 @@
   color: $orangeDark;
 }
 
+.ResultItem__main-artists {
+  color: $blackText;
+}
+
 .ResultItem__name {
   font-size: 1.6em;
+}
+
+.ResultItem__details__header {
+  @include styled-section-header;
+}
+
+.ResultItem__collaborators_facts {
+  .fact__artist {
+    text-transform: capitalize;
+  }
+}
+
+.ResultItem__other-info {
+  margin: 20px auto 0;
 }

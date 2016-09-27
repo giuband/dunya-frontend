@@ -4,7 +4,7 @@ import { toggleExpandCategory } from 'actions/filtersData';
 import CategoryFilterList from './CategoryFilterList';
 import SearchOverviewEntry from '../Search/SearchOverviewEntry';
 import { makeGetVisibleCategoryData, makeGetVisibleSelected, getEntryId,
-  makeGetDetailsForEntry } from '../../selectors/filtersData';
+  makeGetDetailsForCategorySelectedEntries } from '../../selectors/filtersData';
 import { SHOW_ONLY_VISIBLE_SELECTED } from '../../constants';
 import './CategoryFilter.scss';
 import './CategoryFilterSelectedList.scss';
@@ -62,11 +62,11 @@ const makeMapStateToProps = (_, ownProps) => {
   let { data } = ownProps;
   const getVisibleCategoryData = makeGetVisibleCategoryData();
   const getVisibleSelected = makeGetVisibleSelected();
-  const getDetailsForEntry = makeGetDetailsForEntry();
+  const getDetailsForCategorySelectedEntries = makeGetDetailsForCategorySelectedEntries();
   return (state) => {
     data = getVisibleCategoryData(state, ownProps);
     const visibleSelected = getVisibleSelected(state, ownProps);
-    const allSelected = getDetailsForEntry(state, ownProps);
+    const allSelected = getDetailsForCategorySelectedEntries(state, ownProps);
     const selected = (SHOW_ONLY_VISIBLE_SELECTED) ?
       visibleSelected : allSelected;
     const selectedItemsCount = selected.length;

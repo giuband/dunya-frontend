@@ -3,10 +3,19 @@ import 'normalize.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import App from './components/App';
-import configureStore from './store';
+import { loadState, saveState } from 'utils/localStorage';
+import { STORE_APPLICATION_STATE } from 'constants';
+import App from 'components/App';
+import configureStore from 'store';
 
-const store = configureStore();
+const persistedStore = (STORE_APPLICATION_STATE) ? loadState() : undefined;
+const store = configureStore(persistedStore);
+
+if (STORE_APPLICATION_STATE) {
+  store.subscribe(() => {
+    saveState(store.getState());
+  });
+}
 
 render(<AppContainer><App store={store} /></AppContainer>, document.getElementById('app'));
 
