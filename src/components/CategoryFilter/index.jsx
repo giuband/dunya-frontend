@@ -19,7 +19,6 @@ const propTypes = {
   isExpanded: React.PropTypes.bool,
 };
 
-// TODO: don't use <details> as not well supported in Firefox, use action toggleExpandCategory
 const CategoryFilter = (props) => {
   const enrichedEntries = props.selected.map(entry =>
     Object.assign({}, entry, { category: props.category }));

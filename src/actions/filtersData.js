@@ -14,6 +14,8 @@ const fetchFiltersData = () => new Promise((resolve) => {
 });
 
 export const getFiltersData = () => (dispatch) => {
+  // TODO: read it from window.catalogueName and use it as param of fetchFiltersData
+  const catalogueName = 'carnatic';
   dispatch(getFiltersDataRequest());
   fetchFiltersData().then(
     data => dispatch(getFiltersDataSuccess(data)),

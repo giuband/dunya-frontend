@@ -44,6 +44,7 @@ const ResultItem = (props) => {
     linkToRecording = REMOTE_URL + linkToRecording;
   }
   const mainKeys = Object.keys(propTypes);
+  // other keys such as taala, raaga, form, ...
   const otherInfoKeys = Object.keys(props).filter(key => !mainKeys.includes(key));
   return (
     <a href={linkToRecording} className="ResultItem">
