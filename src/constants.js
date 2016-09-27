@@ -16,7 +16,7 @@ export const USE_REMOTE_SOURCES = true;
 export const REMOTE_URL = 'http://dunya.compmusic.upf.edu';
 
 // whether to store application state on localSession
-export const STORE_APPLICATION_STATE = false;
+export const STORE_APPLICATION_STATE = true;
 
 
 /**
