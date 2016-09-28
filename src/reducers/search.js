@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import { DATA_FETCH_STATUS } from 'constants';
 import { SHOW_TOOLTIP, HIDE_TOOLTIP, TOGGLE_FOCUS, SEARCH_REQUEST, SEARCH_APPEND,
-  SEARCH_SUCCESS, SEARCH_FAILURE, UPDATE_SEARCH_INPUT } from '../actions/actionTypes';
+  SEARCH_SUCCESS, SEARCH_FAILURE, UPDATE_SEARCH_INPUT, AUTOCOMPLETE_REQUEST,
+  AUTOCOMPLETE_SUCCESS, AUTOCOMPLETE_FAILURE } from '../actions/actionTypes';
 
 const isTooltipVisible = (state = false, action) => {
   switch (action.type) {
@@ -68,11 +69,28 @@ const moreResults = (state = 0, action) => {
   }
 };
 
+const autocompleteResults = (state = [], action) => {
+  switch (action.type) {
+    case AUTOCOMPLETE_REQUEST: {
+      return [];
+    }
+    case AUTOCOMPLETE_SUCCESS: {
+      return action.datalist;
+    }
+    case AUTOCOMPLETE_FAILURE: {
+      return [];
+    }
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isTooltipVisible,
   isFocused,
   status,
   results,
   input,
+  autocompleteResults,
   moreResults,
 });

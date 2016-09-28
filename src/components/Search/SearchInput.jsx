@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleFocus, updateSearchInput } from 'actions/search';
+import { toggleFocus, updateSearchInput, getAutocompleteList } from 'actions/search';
 import { toggleSelectedEntry } from 'actions/filtersData';
 import { getAllSelectedEntries, getEntryId }
   from 'selectors/filtersData';
@@ -15,8 +15,10 @@ const propTypes = {
   allSelectedItems: React.PropTypes.array,
   toggleSelectedEntry: React.PropTypes.func,
   updateSearchInput: React.PropTypes.func,
+  getAutocompleteList: React.PropTypes.func,
   toggleFocus: React.PropTypes.func,
   isFocused: React.PropTypes.bool,
+  autocompleteResults: React.PropTypes.array,
   windowSize: React.PropTypes.object,
 };
 
@@ -27,6 +29,7 @@ const shortPlaceHolder = 'Search recordings';
 const onInputChange = (evt, props) => {
   const inputContent = evt.target.value;
   props.updateSearchInput(inputContent);
+  props.getAutocompleteList(inputContent);
 };
 
 const unselectLatestEntry = (props) => {
@@ -45,6 +48,11 @@ const SearchInput = (props) => {
   }
   const selectedItems = props.allSelectedItems.map(entry =>
     <SearchOverviewEntry key={getEntryId(entry)} entry={entry} />);
+  const dataList = (props.autocompleteResults) ? (
+    <datalist id="recordings-autocomplete">
+      {props.autocompleteResults.map(recording =>
+        <option value={recording.title} key={getEntryId(recording)} />)}
+    </datalist>) : null;
   return (
     <ol className={`SearchInput${(props.isFocused) ? ' focus' : ''}`}>
       <li>
@@ -54,10 +62,12 @@ const SearchInput = (props) => {
       </li>
       {selectedItems}
       <li>
+        {dataList}
         <input
           id="search"
           className="SearchInput__input"
           type="search"
+          list={dataList ? 'recordings-autocomplete' : ''}
           placeholder={placeHolder}
           onChange={evt => onInputChange(evt, props)}
           onFocus={props.toggleFocus}
@@ -78,9 +88,9 @@ const SearchInput = (props) => {
 
 const mapStateToProps = (state) => {
   const allSelectedItems = getAllSelectedEntries(state);
-  const { isFocused } = state.search;
+  const { isFocused, autocompleteResults } = state.search;
   const { windowSize } = state;
-  return { allSelectedItems, isFocused, windowSize };
+  return { allSelectedItems, autocompleteResults, isFocused, windowSize };
 };
 
 SearchInput.propTypes = propTypes;
@@ -88,4 +98,5 @@ export default connect(mapStateToProps, {
   toggleFocus,
   toggleSelectedEntry,
   updateSearchInput,
+  getAutocompleteList,
 })(SearchInput);

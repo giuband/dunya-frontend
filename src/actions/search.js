@@ -1,7 +1,9 @@
 import { SHOW_TOOLTIP, HIDE_TOOLTIP, TOGGLE_FOCUS, SEARCH_REQUEST,
-  SEARCH_SUCCESS, SEARCH_FAILURE, UPDATE_SEARCH_INPUT, SEARCH_APPEND } from './actionTypes';
+  SEARCH_SUCCESS, SEARCH_FAILURE, UPDATE_SEARCH_INPUT, SEARCH_APPEND,
+  AUTOCOMPLETE_REQUEST, AUTOCOMPLETE_SUCCESS, AUTOCOMPLETE_FAILURE } from './actionTypes';
 import makeActionCreator from './makeActionCreator';
 import { getResults } from '../utils/mockResults';
+import mockAutocomplete from '../utils/mockAutocomplete';
 
 export const showSearchTooltip = makeActionCreator(SHOW_TOOLTIP);
 export const hideSearchTooltip = makeActionCreator(HIDE_TOOLTIP);
@@ -35,4 +37,9 @@ export const getMoreResults = () => (dispatch) => {
     getResults(pageIndex).then(data => dispatch(searchSuccess(data)),
     error => dispatch(searchFailure(error)));
   }, 1000);
+};
+
+export const getAutocompleteList = input => (dispatch) => {
+  dispatch({ type: AUTOCOMPLETE_REQUEST });
+  mockAutocomplete(input).then(datalist => dispatch({ type: AUTOCOMPLETE_SUCCESS, datalist }));
 };
