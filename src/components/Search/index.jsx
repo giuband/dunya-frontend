@@ -8,8 +8,6 @@ import './Search.scss';
 
 const propTypes = {
   getSearchResults: React.PropTypes.func,
-  searchInput: React.PropTypes.string,
-  selectedData: React.PropTypes.object,
   isSearchEnabled: React.PropTypes.bool,
 };
 
@@ -18,7 +16,7 @@ const Search = props => (
     <form
       onSubmit={(evt) => {
         evt.preventDefault();
-        props.getSearchResults(props.searchInput, props.selectedData);
+        props.getSearchResults();
       }}
     >
       <label className="Search__label" htmlFor="search">
@@ -31,8 +29,6 @@ const Search = props => (
 );
 
 const mapStateToProps = state => ({
-  searchInput: state.search.input,
-  selectedData: state.filtersData.selectedData,
   isSearchEnabled: state.search.status !== DATA_FETCH_STATUS.PROGRESS,
 });
 

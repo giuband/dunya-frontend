@@ -14,7 +14,10 @@ const searchAppend = makeActionCreator(SEARCH_APPEND);
 
 export const updateSearchInput = makeActionCreator(UPDATE_SEARCH_INPUT, 'input');
 
-export const getSearchResults = (query, selectedData) => (dispatch) => {
+export const getSearchResults = () => (dispatch, getStore) => {
+  const state = getStore();
+  const query = state.search.input;
+  const { selectedData } = state.filtersData;
   dispatch(searchRequest());
   setTimeout(() => {
     getResults().then(data => dispatch(searchSuccess(data)),
