@@ -7,8 +7,13 @@ export const FILTERS_DATA_URL = {
   hindustani: 'https://whatever',
 };
 
+export const SEARCH_URL = ''; // unique or multiple urls?
+
 // whether to show in selected list only entries that fulfill all filters
 export const SHOW_ONLY_VISIBLE_SELECTED = false;
+
+// categories whose selected items don't need a reference to the category itself
+export const SELF_EXPLANATORY_CATEGORY_ITEMS = ['artists', 'concerts', 'instruments'];
 
 // whether to interpret links starting with / as locals or remote ones
 // N.B. it MUST be false on dunya production

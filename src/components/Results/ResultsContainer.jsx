@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DATA_FETCH_STATUS } from 'constants';
 import { getMoreResults } from '../../actions/search';
+import LoadMoreResultsButton from './LoadMoreResultsButton';
 import Results from './index';
 import Loading from '../Loading';
 import './Results.scss';
@@ -9,8 +10,8 @@ import './Results.scss';
 const propTypes = {
   status: React.PropTypes.string,
   results: React.PropTypes.array,
-  pagesLoaded: React.PropTypes.number,
-  hasMorePages: React.PropTypes.func,
+  moreResults: React.PropTypes.number,
+  getMoreResults: React.PropTypes.func,
 };
 
 const ResultsContainer = (props) => {
@@ -25,11 +26,23 @@ const ResultsContainer = (props) => {
       return progress;
     }
     case (DATA_FETCH_STATUS.SUCCESS): {
-      return <Results results={props.results} />;
+      let loadMoreButton = null;
+      if (props.moreResults) {
+        loadMoreButton = (
+          <form
+            onSubmit={(evt) => {
+              evt.preventDefault();
+              props.getMoreResults();
+            }}
+          >
+            <LoadMoreResultsButton moreResults={props.moreResults} />
+          </form>
+        );
+      }
+      return <Results results={props.results}>{loadMoreButton}</Results>;
     }
     case (DATA_FETCH_STATUS.FAILURE): {
-      // show error page
-      return <div>Some errors</div>;
+      return <div className="Results__fetch-errors">Errors while retrieving data</div>;
     }
     default:
       return null;
@@ -39,6 +52,6 @@ const ResultsContainer = (props) => {
 ResultsContainer.propTypes = propTypes;
 
 export default connect((state) => {
-  const { status, results, pagesLoaded } = state.search;
-  return { status, results, pagesLoaded };
-}, {})(ResultsContainer);
+  const { status, results, moreResults } = state.search;
+  return { status, results, moreResults };
+}, { getMoreResults })(ResultsContainer);

@@ -9,6 +9,7 @@
   color: $brownDark;
   border-radius: 20px;
   padding: 0 6px 0 10px;
+  text-transform: capitalize;
   &:before {
     content: '';
     height: 100%;

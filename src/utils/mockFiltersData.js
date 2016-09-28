@@ -1,4 +1,4 @@
-import dunyaMetadata from './dunya-metadata.json';
+import dunyaMetadata from './dunya-metadata-aliases.json';
 
 const useWestCatalogue = false;
 

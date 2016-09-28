@@ -8,13 +8,19 @@ export const hideSearchTooltip = makeActionCreator(HIDE_TOOLTIP);
 export const toggleFocus = makeActionCreator(TOGGLE_FOCUS);
 
 const searchRequest = makeActionCreator(SEARCH_REQUEST);
-const searchSuccess = makeActionCreator(SEARCH_SUCCESS, 'results');
+const searchSuccess = makeActionCreator(SEARCH_SUCCESS, 'data');
 const searchFailure = makeActionCreator(SEARCH_FAILURE, 'error');
 const searchAppend = makeActionCreator(SEARCH_APPEND);
 
 export const updateSearchInput = makeActionCreator(UPDATE_SEARCH_INPUT, 'input');
 
-export const getSearchResults = (query, selectedData) => (dispatch) => {
+let pageIndex = 0;
+
+export const getSearchResults = () => (dispatch, getStore) => {
+  pageIndex = 0;
+  const state = getStore();
+  const query = state.search.input;
+  const { selectedData } = state.filtersData;
   dispatch(searchRequest());
   setTimeout(() => {
     getResults().then(data => dispatch(searchSuccess(data)),
@@ -22,7 +28,8 @@ export const getSearchResults = (query, selectedData) => (dispatch) => {
   }, 1000);
 };
 
-export const getMoreResults = (query, selectedData, pageIndex) => (dispatch) => {
+export const getMoreResults = () => (dispatch) => {
+  pageIndex += 1;
   dispatch(searchAppend());
   setTimeout(() => {
     getResults(pageIndex).then(data => dispatch(searchSuccess(data)),

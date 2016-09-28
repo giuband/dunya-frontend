@@ -3,6 +3,7 @@ import { GET_FILTERS_DATA_REQUEST, GET_FILTERS_DATA_SUCCESS, GET_FILTERS_DATA_FA
   TOGGLE_SELECTED_ENTRY, TOGGLE_EXPAND_CATEGORY, RESET_CATEGORY_SELECTIONS,
   SET_SEARCH_CATEGORY, RESET_SEARCH_CATEGORY }
   from './actionTypes';
+import { getSearchResults } from './search';
 import { receivedData } from '../utils/mockFiltersData';
 
 const getFiltersDataRequest = makeActionCreator(GET_FILTERS_DATA_REQUEST);
@@ -14,15 +15,21 @@ const fetchFiltersData = () => new Promise((resolve) => {
 });
 
 export const getFiltersData = () => (dispatch) => {
+  // TODO: read it from window.catalogueName and use it as param of fetchFiltersData
+  const catalogueName = 'carnatic';
   dispatch(getFiltersDataRequest());
   fetchFiltersData().then(
     data => dispatch(getFiltersDataSuccess(data)),
     error => dispatch(getFiltersDataFailure(error)));
 };
 
-export const toggleSelectedEntry = makeActionCreator(TOGGLE_SELECTED_ENTRY, 'entryID', 'category');
+export const toggleSelectedEntryInCategory = makeActionCreator(TOGGLE_SELECTED_ENTRY, 'entryID', 'category');
+
+export const toggleSelectedEntry = (entryID, category) => (dispatch) => {
+  dispatch(toggleSelectedEntryInCategory(entryID, category));
+  dispatch(getSearchResults());
+};
 export const toggleExpandCategory = makeActionCreator(TOGGLE_EXPAND_CATEGORY, 'category');
-export const resetCategorySelections = makeActionCreator(RESET_CATEGORY_SELECTIONS);
 
 // action to update the content of the search box specific to a single category
 export const setSearchCategory = makeActionCreator(SET_SEARCH_CATEGORY, 'search', 'category');
