@@ -7,7 +7,15 @@ export const FILTERS_DATA_URL = {
   hindustani: 'https://whatever',
 };
 
-export const SEARCH_URL = ''; // unique or multiple urls?
+export const SEARCH_URL = {
+  carnatic: 'https://whatever',
+  hindustani: 'https://whatever',
+};
+
+export const AUTOCOMPLETE_URL = {
+  carnatic: 'https://whatever',
+  hindustani: 'https://whatever',
+};
 
 // whether to show in selected list only entries that fulfill all filters
 export const SHOW_ONLY_VISIBLE_SELECTED = false;
