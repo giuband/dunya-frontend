@@ -1,5 +1,5 @@
 import expect from 'expect';
-import { toggleSelectedEntry } from '../actions/filtersData';
+import { toggleSelectedEntryInCategory } from '../actions/filtersData';
 import filtersData from './filtersData';
 import { GET_FILTERS_DATA_SUCCESS } from '../actions/actionTypes';
 import { DATA_FETCH_STATUS } from '../constants';
@@ -20,7 +20,7 @@ describe('filtersData reducer', () => {
     const action = { data: receivedData, type: GET_FILTERS_DATA_SUCCESS };
     expect(filtersData(undefined, action)).toEqual(expectedInitialState);
   });
-  it('correctly toggles an entry', () => {
+  describe('correctly toggles an entry', () => {
     const selected = artists[0].name;
     const category = 'artists';
     const expectedSelectedData = Object.assign({}, expectedInitialState.selectedData, {
@@ -29,11 +29,15 @@ describe('filtersData reducer', () => {
     const expectedState = Object.assign({}, expectedInitialState, {
       selectedData: expectedSelectedData,
     });
-    // select entry ...
-    expect(filtersData(expectedInitialState, toggleSelectedEntry(selected, category)))
-      .toEqual(expectedState);
-    // ...and unselect it
-    expect(filtersData(expectedState, toggleSelectedEntry(selected, category)))
-      .toEqual(expectedInitialState);
+    it('correctly selects an entry', () => {
+      expect(filtersData(expectedInitialState, toggleSelectedEntryInCategory(selected, category))
+        .selectedData)
+      .toEqual(expectedState.selectedData);
+    });
+    it('correctly unselects it', () => {
+      expect(filtersData(expectedState, toggleSelectedEntryInCategory(selected, category))
+        .selectedData)
+        .toEqual(expectedInitialState.selectedData);
+    });
   });
 });
