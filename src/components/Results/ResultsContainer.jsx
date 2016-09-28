@@ -42,8 +42,7 @@ const ResultsContainer = (props) => {
       return <Results results={props.results}>{loadMoreButton}</Results>;
     }
     case (DATA_FETCH_STATUS.FAILURE): {
-      // TODO: add error page
-      return <div>Some errors</div>;
+      return <div className="Results__fetch-errors">Errors while retrieving data</div>;
     }
     default:
       return null;
