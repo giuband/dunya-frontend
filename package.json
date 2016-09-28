@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/giuband/dunya-frontend#readme",
   "dependencies": {
-    "autoprefixer": "^6.4.0",
+    "autoprefixer": "^6.5.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-polyfill": "^6.9.1",
