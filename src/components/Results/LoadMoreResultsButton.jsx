@@ -1,11 +1,12 @@
 import React from 'react';
+import './LoadMoreResultsButton.scss';
 
 const propTypes = {
   moreResults: React.PropTypes.number,
 };
 
 const LoadMoreResultsButton = props =>
-  <button className="LoadMoreResults" type="submit">
+  <button className="LoadMoreResultsButton" type="submit">
     Load More ({props.moreResults})
   </button>;
 
