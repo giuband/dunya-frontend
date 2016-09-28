@@ -66,14 +66,16 @@ const ResultItem = (props) => {
         <div className="ResultItem__collaborators">
           {renderCollaboratorsFacts(props.selectedArtists, props.collaborators)}
         </div>
-        {otherInfoKeys.map(section =>
-          <div className="ResultItem__other-info" key={section}>
-            <div className="ResultItem__details__header">{section}</div>
-            <div className="ResultItem__other-info-list">
-              {renderList(props[section])}
+        <div className="ResultItem__other-info__container">
+          {otherInfoKeys.map(section =>
+            <div className="ResultItem__other-info" key={section}>
+              <div className="ResultItem__details__header">{section}</div>
+              <div className="ResultItem__other-info-list">
+                {renderList(props[section])}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </a>
   );

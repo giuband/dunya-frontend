@@ -57,7 +57,15 @@
 }
 
 .ResultItem__details__header {
-  @include styled-section-header;
+  color: $orangeDark;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.ResultItem__other-info-list {
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: top;
 }
 
 .ResultItem__collaborators_facts {
@@ -66,6 +74,11 @@
   }
 }
 
+.ResultItem__other-info__container {
+  margin-top: 10px 0;
+}
+
 .ResultItem__other-info {
-  margin: 20px auto 0;
+  margin-bottom: 2px;
+  text-transform: capitalize;
 }
