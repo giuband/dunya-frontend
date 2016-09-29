@@ -41,17 +41,17 @@ At initial mount, the app requests data from the server to fill up the sidebar w
       "instruments": []
     }],
   "concerts": [{
-    "id": "c1",
-    "name": "concert 1",
-    "aliases": ["that concert"]
-    }, {
+      "id": "c1",
+      "name": "concert 1",
+      "aliases": ["that concert"]
+      }, {
       "id": "c2",
       "name": "concert 2"
     }],
   "instruments": [{
-    "uuid": "i1",
-    "name": "Violin"
-    }, {
+      "uuid": "i1",
+      "name": "Violin"
+      }, {
       "uuid": "i2",
       "name": "Cello"
     }],
@@ -64,6 +64,11 @@ Each entry must as well contain an id field, but *this is not required to be nam
 
 If an entry has an `aliases` field, the values on that field will be used during the search.
 
+### Serving data for autocomplete
+
+
+### Serving search results
+
 
 ## Customization/Adding new content
 In case of extending the application to support a new catalogue, the settings for the new catalogue have to be added in:
@@ -71,7 +76,7 @@ In case of extending the application to support a new catalogue, the settings fo
 - `SEARCH_URL`
 - `AUTOCOMPLETE_URL`
 
-`SELF_EXPLANATORY_CATEGORY_ITEMS` might as well be extended in order to include new response keys that don't need an explanation on the search bar.
+`SELF_EXPLANATORY_CATEGORY_ITEMS` might as well be extended in order to include new response keys that don't need an explanation on the search bar. In the same way, you might need to add new items to the list `ID_KEYS`.
 
 ## License
 MIT
