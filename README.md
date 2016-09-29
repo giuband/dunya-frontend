@@ -29,7 +29,7 @@ All settings in the following paragraphs are stored in the file `src/settings.js
 
 ### Serving data for filters
 At initial mount, the app requests data from the server to fill up the sidebar with filters. The address for this request is the value of the setting `FILTERS_DATA_URL[$dunya_catalogue]`, where `$dunya_catalogue` is the content of the template variable `dunya_catalogue` passed to `index.html` (as explained in previous section). The response of the server at this address must be an object, whose values are arrays of entries for the corresponding key. An example:
-```json
+```javascript
 {
   "artists": [
     {
@@ -72,7 +72,7 @@ If an entry has an `aliases` field, the values on that field will be used during
 
 ### Serving data for autocomplete
 You might want to send data for autocomplete when the user is typing in the search bar. In this case, start by setting the proper address in `AUTOCOMPLETE_URL[$dunya_catalogue]`. This address should then read the parameter `query` from the incoming request and reply to it with a list of results, in the following shape:
-```json
+```javascript
 [
   {
     "mbid": "8618ff0c-555e-4f3c-90d5-0438aeae4659",
