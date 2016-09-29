@@ -17,7 +17,7 @@ const propTypes = {
 
 const renderList = list => list.join(', ');
 
-const renderCollaboratorsFacts = (selectedArtists, recordingArtists) => {
+const renderCollaboratorsFacts = (selectedArtists = [], recordingArtists = []) => {
   const facts = recordingArtists.reduce((curFacts, curArtist) => {
     if (selectedArtists.includes(curArtist.name)) {
       const instrumentPlayed = curArtist.instrument;
