@@ -84,8 +84,42 @@ You might want to send data for autocomplete when the user is typing in the sear
 ]
 ```
 **Each result must have the `title` property.**
+If you don't want to enable autocomplete, just don't set the option `AUTOCOMPLETE_URL[$dunya_catalogue]` (or put it to `undefined`).
 
 ### Serving search results
+The client will send a request with the following two parameters:
+```javascript
+{
+  "query": (str) // the query manually typed from the user (i.e. a searched recording)
+  "selectedData": {
+    "artists": ["a1"], // the ids of the artists selected by the user
+    "concerts": [], // empty array if the user didn't select anything in this category
+  }
+}
+```
+The keys of `selectedData` will equal the keys of the response sent by [the server for the filters](#serving-data-for-filters).
+The server answers this request with a response that is a list of object, each one storing the details of a recording the matches the search. **Each result should then have the following keys: `concert`, `image`, `linkToRecording`, `mainArtists`, `name`**.
+The following one is an example of a correct response:
+```javascript
+[
+  {
+    "collaborators": [ // list of collaborators (this key can be omitted if no collaborators are available)
+      {
+        "name": "artist 1", // name of the first collaborator
+        "instrument": "voice" // and the instrument he/she plays in this recording
+      }, ... // other collaborators
+    ],
+    "concert": "concert 1", // the concert name
+    "image": "/static/image.png",
+    "linkToRecording": "/recording/1.html", // link to the recording page
+    "mainArtists": ["artist 1", "artist 2"], // the names of the main artists of the recording
+    "name": "recording 1", // the name of the recording
+    "taala": "aadi", // optional
+    ... // other optional keys (such as "raaga", "form",... No fixed key names here, use what you want!)
+  }, ...// other search results, with the same shape
+]
+```
+The client makes no assumption on the keys other than `concert`, `image`, `linkToRecording`, `mainArtists`, `name` and `collaborators`. If the response contain any other key, the value for that key will be displayed in the final UI. This means that the UI will correctly work with non-carnatic results without any change in the code.
 
 
 ## Customization/Adding new content
