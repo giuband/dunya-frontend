@@ -1,5 +1,5 @@
 import React from 'react';
-import { USE_REMOTE_SOURCES, REMOTE_URL } from 'constants';
+import { USE_REMOTE_SOURCES, REMOTE_URL } from 'settings';
 import './ResultItem.scss';
 
 const propTypes = {

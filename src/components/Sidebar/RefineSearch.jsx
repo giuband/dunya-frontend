@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { DATA_FETCH_STATUS } from 'constants';
 import CategoryFilter from '../CategoryFilter';
 import { getFiltersData } from '../../actions/filtersData';
-import { DATA_FETCH_STATUS } from '../../constants';
 import './RefineSearch.scss';
 
 const sortCategories = (catA, catB) => {

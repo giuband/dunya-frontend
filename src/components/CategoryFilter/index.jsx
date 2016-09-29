@@ -5,7 +5,7 @@ import CategoryFilterList from './CategoryFilterList';
 import SearchOverviewEntry from '../Search/SearchOverviewEntry';
 import { makeGetVisibleCategoryData, makeGetVisibleSelected, getEntryId,
   makeGetDetailsForCategorySelectedEntries } from '../../selectors/filtersData';
-import { SHOW_ONLY_VISIBLE_SELECTED } from '../../constants';
+import { SHOW_ONLY_VISIBLE_SELECTED } from '../../settings';
 import './CategoryFilter.scss';
 import './CategoryFilterSelectedList.scss';
 import sortByName from '../../utils/sortByName';

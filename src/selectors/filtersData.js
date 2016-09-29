@@ -1,11 +1,10 @@
 import { createSelector } from 'reselect';
 import sortByName from '../utils/sortByName';
-import { SHOW_ONLY_VISIBLE_SELECTED } from '../constants';
+import { SHOW_ONLY_VISIBLE_SELECTED, ID_KEYS } from '../settings';
 
 export const getEntryId = (entry) => {
-  const idNames = ['mbid', 'uuid', 'id'];
   let entryID;
-  for (const id of idNames) {
+  for (const id of ID_KEYS) {
     if (entry[id]) {
       entryID = entry[id];
     }

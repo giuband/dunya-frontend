@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { SELF_EXPLANATORY_CATEGORY_ITEMS } from 'constants';
+import { SELF_EXPLANATORY_CATEGORY_ITEMS } from 'settings';
 import { toggleSelectedEntry } from 'actions/filtersData';
 import { getEntryId } from 'selectors/filtersData';
 import pluralize from 'utils/pluralRules';

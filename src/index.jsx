@@ -4,7 +4,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { loadState, saveState } from 'utils/sessionStorage';
-import { STORE_APPLICATION_STATE } from 'constants';
+import { STORE_APPLICATION_STATE } from 'settings';
 import App from 'components/App';
 import configureStore from 'store';
 
