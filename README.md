@@ -10,16 +10,16 @@ npm install
 ```
 to install all the dependencies.
 
-Then run
-```
-npm run dev
-```
-to start an express server that simulates the client-only environment with hot reloading.
-
 If you want to generate the production build, run:
 ```
 npm run build
 ```
+
+If instead you want to start an express server that simulates the client-only environment with hot reloading, run:
+```
+npm run dev
+```
+
 
 ## Integration with back-end
 The web-app is written to be flexible to the content provided by the server. To let this application know which catalogue to load, **start by rendering `index.html` with a template variable named `dunya_catalogue`**, whose value must be in `[carnatic, hindustani]` (although it's possible to extend these values, see section [Customization/Adding new content](#customizationadding-new-content)).
