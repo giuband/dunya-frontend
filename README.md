@@ -31,30 +31,36 @@ All settings in the following paragraphs are stored in the file `src/settings.js
 At initial mount, the app requests data from the server to fill up the sidebar with filters. The address for this request is the value of the setting `FILTERS_DATA_URL[$dunya_catalogue]`, where `$dunya_catalogue` is the content of the template variable `dunya_catalogue` passed to `index.html` (as explained in previous section). The response of the server at this address must be an object, whose values are arrays of entries for the corresponding key. An example:
 ```json
 {
-  "artists": [{
+  "artists": [
+    {
       "id": "a1",
       "name": "artist 1",
       "instruments": ["i1", "i2"]
-      }, {
+    }, {
       "id": "a2",
       "name": "artist 2",
       "instruments": []
-    }],
-  "concerts": [{
+    }, // ...other artists
+  ],
+  "concerts": [
+    {
       "id": "c1",
       "name": "concert 1",
       "aliases": ["that concert"]
-      }, {
+    }, {
       "id": "c2",
       "name": "concert 2"
-    }],
-  "instruments": [{
+    }, // ...other concerts
+  ],
+  "instruments": [
+    {
       "uuid": "i1",
       "name": "Violin"
-      }, {
+    }, {
       "uuid": "i2",
       "name": "Cello"
-    }],
+    }, // ...other instruments
+  ], // ...other keys
 }
 ```
 **The key `artists` in the response is mandatory**. There are no other rules for the names and/or amount of the response keys. Each key of the response will be a section of filters in the sidebar.
@@ -65,7 +71,19 @@ Each entry must as well contain an id field, but *this is not required to be nam
 If an entry has an `aliases` field, the values on that field will be used during the search.
 
 ### Serving data for autocomplete
-
+You might want to send data for autocomplete when the user is typing in the search bar. In this case, start by setting the proper address in `AUTOCOMPLETE_URL[$dunya_catalogue]`. This address should then read the parameter `query` from the incoming request and reply to it with a list of results, in the following shape:
+```json
+[
+  {
+    "mbid": "8618ff0c-555e-4f3c-90d5-0438aeae4659",
+    "title": "Balagopala"
+  }, {
+    "mbid": "33ef2098-d4ba-40ec-b972-dbda5114e3e2",
+    "title": "Koovi Azhaithal"
+  }, ... other results
+]
+```
+**Each result must have the `title` property.**
 
 ### Serving search results
 
