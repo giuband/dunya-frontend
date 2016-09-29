@@ -31,13 +31,13 @@ const renderRefineSection = (receivedData) => {
       </header>
       <nav>
         <ul className="RefineSearch__categories-list">
-        {sortedCategories.map(category =>
-          <CategoryFilter
-            key={category}
-            category={category}
-            data={receivedData[category]}
-          />)
-        }
+          {sortedCategories.map(category =>
+            <CategoryFilter
+              key={category}
+              category={category}
+              data={receivedData[category]}
+            />)
+          }
         </ul>
       </nav>
     </div>

@@ -21,7 +21,7 @@ render(<AppContainer><App store={store} /></AppContainer>, document.getElementBy
 
 if (module.hot) {
   module.hot.accept('./components/App', () => {
-    const AppComponent = require('./components/App').default;
+    const AppComponent = require('./components/App').default; // eslint-disable-line
 
     render(
       <AppContainer>
