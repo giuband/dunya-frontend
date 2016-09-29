@@ -22,7 +22,7 @@ npm run build
 ```
 
 ## Integration with back-end
-The web-app is written to be flexible to the content provided by the server. To let this application know which catalogue to load, **start by rendering `index.html` with a template variable named `dunya_catalogue`**, whose value must be in `[carnatic, hindustani]` (although it's possible to extend these values, see section [Customization/Adding new content](#customization/adding-new-content)).
+The web-app is written to be flexible to the content provided by the server. To let this application know which catalogue to load, **start by rendering `index.html` with a template variable named `dunya_catalogue`**, whose value must be in `[carnatic, hindustani]` (although it's possible to extend these values, see section [Customization/Adding new content](#customizationadding-new-content)).
 
 ### Settings and behavior
 All settings in the following paragraphs are stored in the file `src/settings.js`. If you change one, please rebuild the bundle with the command `npm run build`.
