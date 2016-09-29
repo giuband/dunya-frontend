@@ -193,14 +193,15 @@ const getVisibleByOtherCategoriesSelections = createSelector(
 
 /** the actual search engine */
 const entrySatisfiesSearch = (entry, search) => {
-  const letters = Array.prototype.slice.call(search.toLowerCase());
+  const preprocessName = name => name.replace(/\W/g, '').toLowerCase();
+  const letters = Array.prototype.slice.call(preprocessName(search));
   const alphanumeric = '\\w*';
   const regex = letters.reduce((curRegex, curLetter) =>
     curRegex + curLetter + alphanumeric,
     alphanumeric);
   const aliases = entry.aliases || [];
   const entryNames = [entry.name, ...aliases];
-  return entryNames.some(name => Boolean(name.toLowerCase().match(new RegExp(regex))));
+  return entryNames.some(name => Boolean(preprocessName(name).match(new RegExp(regex))));
 };
 
 /** selector that returns category entries matched by search and that
